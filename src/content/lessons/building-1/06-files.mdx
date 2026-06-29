@@ -1,0 +1,45 @@
+---
+title: 把文件/图片丢给它读
+building: 1
+chapter: 1
+order: 6
+kind: atom
+hookMood: think
+hook: 想让 AI 帮你看份 30 页的 PDF、或一张报错截图——<span class="hl-o">你还在一句句打字描述给它?</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+import Callout from '../../../components/Callout.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="自己硬啃" afterLabel="直接丢给它">
+  <div slot="before">
+    <div style="font-size:14px;color:#8A7C66;line-height:1.8;">一份 30 页的合同 PDF，你逐页找"违约金""到期时间"在哪……<br/><br/>看了一下午，眼睛发花，还怕看漏了关键条款。<div style="margin-top:10px;font-size:12px;color:#B07B4E;">😮‍💨 又累又不放心</div></div>
+  </div>
+  <div slot="after">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><div style="background:#F5A04C;color:#fff;padding:9px 13px;border-radius:15px;border-top-right-radius:4px;font-size:13.5px;max-width:90%;line-height:1.5;">📎 合同.pdf —— 违约金和续约条款分别是啥?有没有对我不利的?</div></div>
+    <div style="display:flex;gap:8px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#7FB98E;"></div><div style="background:#fff;color:#4A3A2C;padding:10px 13px;border-radius:15px;border-top-left-radius:4px;font-size:13.5px;line-height:1.65;max-width:84%;box-shadow:0 3px 10px rgba(120,90,50,0.08);">违约金在第 8 条:逾期按日 0.5% 计；续约在第 12 条，到期自动续 1 年。⚠️ 第 8 条对你偏重，建议谈一下。<div style="margin-top:8px;font-size:12px;color:#5FA071;">✅ 几秒定位 + 大白话解释</div></div></div>
+  </div>
+  <span slot="caption">别打字描述了，把文件本身丢给它</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+这种"能读文件、能看图"的本事，叫 <Term id="multimodal">「多模态」</Term>。操作很简单:**输入框旁边点「＋」或回形针 📎，选文件，或直接把文件 / 截图拖进对话框**（图片还能直接复制粘贴）。<span style="color:#9A876F;font-size:13.5px;">（点高亮词看看什么意思）</span>
+
+<Callout type="same">
+Kimi / 豆包 / ChatGPT / Claude 都能传 PDF、Word、Excel、图片。<strong>小提醒</strong>:个别工具(如 DeepSeek)"看图"主要是把图里的字提出来,不算真正看懂画面;要"看懂图表/截图"用 Kimi、ChatGPT、Claude 更稳。
+</Callout>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`帮我用大白话总结这份文件的重点：
+1. 它主要讲了什么？
+2. 有哪些我要特别注意 / 对我不利的地方？
+3. 有什么不确定的，直接说，别编。`}>
+  <span slot="intro">找一份你手头的 PDF、或一张截图，拖进 Kimi，再发这段:</span>
+</TryThis>

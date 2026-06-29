@@ -6,7 +6,7 @@ interface NavItem { slug: string; title: string; }
 interface Props {
   title: string;
   hook: string;
-  building: 1 | 2;
+  building: 1 | 2 | 3;
   pos: number;          // 本章第几关
   total: number;        // 本章共几关
   kind?: 'atom' | 'workshop';
@@ -15,8 +15,8 @@ interface Props {
   next?: NavItem | null;
 }
 const { title, hook, building, pos, total, kind = 'atom', hookMood = 'think', prev, next } = Astro.props;
-const bld = building === 1 ? '楼①' : '楼②';
-const theme = building === 1 ? 'orange' : 'green';
+const bld = building === 1 ? '楼①' : building === 2 ? '楼②' : '楼③';
+const theme = building === 1 ? 'orange' : building === 2 ? 'green' : 'berry';
 const segs = Array.from({ length: total }, (_, i) => i + 1);
 ---
 <article class={`lesson theme-${theme}`}>
@@ -70,6 +70,8 @@ const segs = Array.from({ length: total }, (_, i) => i + 1);
   .theme-orange .seg.cur { background: var(--c-orange); }
   .theme-green .seg.cur { background: var(--c-green); }
   .theme-green .seg.todo { background: #E3EFE5; }
+  .theme-berry .seg.cur { background: var(--c-berry); }
+  .theme-berry .seg.todo { background: #F0E4EC; }
   .lh-title { font-size: 25px; margin: 11px 0 0; }
   .lh-pad { padding: 20px 20px 0; }
 
@@ -83,6 +85,7 @@ const segs = Array.from({ length: total }, (_, i) => i + 1);
   .lnav-next { text-align: right; box-shadow: 0 6px 14px rgba(245,160,76,0.3); }
   .theme-orange .lnav-next { background: var(--c-orange); }
   .theme-green .lnav-next { background: var(--c-green); box-shadow: 0 6px 14px rgba(127,185,142,0.3); }
+  .theme-berry .lnav-next { background: var(--c-berry); box-shadow: 0 6px 14px rgba(199,127,166,0.3); }
   .lnav-k { font-size: 11px; color: var(--c-ink-mute2); }
   .lnav-prev .lnav-t { font-size: 14px; font-weight: 600; color: var(--c-ink-strong); }
   .lnav-next .lnav-k { color: rgba(255,255,255,0.85); }

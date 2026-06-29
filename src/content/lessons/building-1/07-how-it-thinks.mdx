@@ -1,0 +1,45 @@
+---
+title: 它其实在"猜下一个词"
+building: 1
+chapter: 1
+order: 7
+kind: atom
+hookMood: aha
+hook: 你有没有觉得 AI 啥都懂、答得飞快?其实它没在"查资料"——<span class="hl-o">它在玩一个填空游戏。</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="你以为的 AI" afterLabel="其实的 AI">
+  <div slot="before">
+    <div style="font-size:14px;color:#8A7C66;line-height:1.85;">你问一句 → 它跑去一个巨大的<strong>"标准答案库"</strong>里，查到那条准确答案，再交给你。<div style="margin-top:10px;font-size:12px;color:#B07B4E;">❌ 其实根本没有这么个"答案库"</div></div>
+  </div>
+  <div slot="after">
+    <div style="font-size:14px;color:#4A3A2C;line-height:1.85;">它读过海量文字，然后根据你的话，<strong>一个词一个词地猜"最通顺、最可能的下一个词"</strong>接下去。<div style="margin-top:10px;background:#FFF4E0;border-radius:10px;padding:9px 12px;font-size:13px;color:#9A6A2E;">就像填空：<br/>"今天天气真 ___" → 它猜"不错"</div><div style="margin-top:8px;font-size:12px;color:#5FA071;">✅ 所以它很顺，但也会一本正经地编</div></div>
+  </div>
+  <span slot="caption">它在"猜最顺的话"，不是在"查标准答案"</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+正因为它是"猜词"而不是"查库"，有三件事你得心里有数，<span class="hl-g">别全信它</span>:
+
+- 它会一本正经地编 → 这叫 <Term id="hallucinate">「胡编」</Term>
+- 它爱顺着你说，哪怕你错了 → 这叫 <Term id="sycophancy">「奉承」</Term>
+- 它不知道最近发生的事 → 因为它有 <Term id="cutoff">「知识截止」</Term>
+
+<span style="color:#9A876F;font-size:13.5px;">（点高亮词，分别看看什么意思）</span>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`接下来请你记住三条：
+1. 不确定就直说"我不确定"，别编；
+2. 别为了让我满意而附和，有不同意见请直接说；
+3. 涉及最近发生的事，提醒我你可能不知道，需要联网或我自己核实。`}>
+  <span slot="intro">给 AI 发这段"清醒剂"，让它别那么爱编、爱顺着你:</span>
+</TryThis>
