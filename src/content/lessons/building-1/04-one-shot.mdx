@@ -34,13 +34,13 @@ import TryThis from '../../../components/TryThis.astro';
 
 <Step n="③" label="它叫什么" tone="green" />
 
-这种"一次把要求说全"的提示词，叫 <Term id="structured">「结构化提示」</Term>。<span class="hl-g">想清楚再一次问</span>，比来回挤牙膏省一半时间。
+这种"一次把要求说全"的提示词，叫 <Term id="structured">「结构化提示」</Term>。<span class="hl-g">想清楚再一次问</span>，比来回挤牙膏省一半时间。<span style="color:#9A876F;font-size:13.5px;">（第1关教你把话说<strong>清楚</strong>，这关教你一次<strong>说全</strong>——别挤牙膏。）</span>
 
 <Step n="④" label="你去试一下" tone="green" />
 
-<TryThis prompt={`角色：你是【资深公众号文案】
-任务：帮我【写 10 个活动标题】
-要求：【活泼、带数字、20 字内】
-给谁看：【职场新人】`}>
+<TryThis prompt={`角色：你是【资深文案 / 测试工程师 / 设计师…挑一个】
+任务：帮我【写 10 个标题 / 列这个功能的测试点 / 写一段设计说明】
+要求：【比如：带数字、20 字内 / 覆盖异常情况 / 控制在 3 段】
+给谁看：【职场新人 / 开发同事 / 客户】`}>
   <span slot="intro">照着这四行"一次说全"的骨架填，发给 AI：</span>
 </TryThis>

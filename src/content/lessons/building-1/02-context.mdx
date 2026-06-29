@@ -1,5 +1,5 @@
 ---
-title: 给 AI 上下文
+title: 喂资料给它垫底
 building: 1
 chapter: 1
 order: 2
@@ -33,7 +33,7 @@ import Callout from '../../../components/Callout.astro';
 
 <Step n="③" label="它叫什么" tone="green" />
 
-你提前给它的那些背景资料——数据、记录、你的情况——叫 <Term id="context">「上下文」</Term>。<span class="hl-g">AI 只能看到你给它的东西</span>，给得越多越贴。
+你提前给它的那些背景资料——数据、记录、你的情况——叫 <Term id="context">「上下文」</Term>。<span class="hl-g">AI 只能看到你给它的东西</span>，给得越多越贴。<span style="color:#9A876F;font-size:13.5px;">（点一下高亮词，看看什么意思）</span>
 
 <Callout type="danger" title="⚠️ 别喂这些给它">
 公司机密 · 客户隐私 · 未公开数据。喂出去就可能收不回来。
@@ -44,7 +44,7 @@ import Callout from '../../../components/Callout.astro';
 <TryThis prompt={`我手头有这些资料：
 【把你的数据 / 记录 / 背景粘在这里】
 
-请根据上面的资料，帮我【做什么，比如复盘 / 写纪要 / 总结】。
+请根据上面的资料，帮我【做什么，比如复盘 / 写纪要 / 列测试点 / 写设计说明】。
 不确定的地方别编，直接说不确定。`}>
   <span slot="intro">先粘资料、再提要求——把下面这段填一填发给 AI：</span>
 </TryThis>

@@ -4,8 +4,61 @@ building: 2
 chapter: 1
 order: 3
 kind: atom
-draft: true
-hook: 学会让 Agent 真正动手帮你改文件、做事情。
+hookMood: aha
+hook: 前面它只是"说"；这一关，它真的<span class="hl-g">动手</span>——帮你把电脑里的文件改好，而且动手前一定先问你。
 ---
 
-敬请期待。
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Terminal from '../../../components/Terminal.astro';
+import Callout from '../../../components/Callout.astro';
+
+<div style="font-size:15px;font-weight:600;color:#3A2C1E;margin:6px 0 12px;">先看它能干嘛 · 拖中间这条线 →</div>
+
+<BeforeAfter beforeLabel="你那个乱糟糟的 待办.txt" afterLabel="它帮你整理后" height={250}>
+  <div slot="before">
+    <div style="font-family:var(--font-body);font-size:13.5px;line-height:1.9;color:#8A7C66;white-space:pre-wrap;">{`买牛奶
+周五交报告
+给妈妈打电话
+买牛奶
+下周看牙医
+回老板邮件`}</div>
+  </div>
+  <div slot="after">
+    <div style="font-family:var(--font-body);font-size:13px;line-height:1.75;color:#4A3A2C;white-space:pre-wrap;">{`## 今天
+- [ ] 给妈妈打电话
+- [ ] 回老板邮件
+## 本周
+- [ ] 周五交报告
+- [ ] 买牛奶
+## 以后
+- [ ] 下周看牙医`}</div>
+    <div style="margin-top:6px;font-size:12px;color:#5FA071;">✅ 自动分了类、加了方框、还去掉了重复的"买牛奶"</div>
+  </div>
+  <span slot="caption">你只动了嘴，文件它来改</span>
+</BeforeAfter>
+
+<div style="display:flex;flex-direction:column;gap:12px;margin:22px 0;">
+  <div style="display:flex;gap:13px;align-items:flex-start;"><div style="width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:#7FB98E;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-hand);font-size:16px;">1</div><div style="flex:1;padding-top:4px;font-size:15px;line-height:1.7;">在 待办.txt <strong>所在的那个文件夹</strong>里打开终端，输入 <code style="background:#F4E2BE;padding:1px 7px;border-radius:6px;color:#9A6A2E;">claude</code> 启动。</div></div>
+  <div style="display:flex;gap:13px;align-items:flex-start;"><div style="width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:#7FB98E;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-hand);font-size:16px;">2</div><div style="flex:1;padding-top:4px;font-size:15px;line-height:1.7;">用大白话说要它干嘛，比如："帮我把 待办.txt 按今天/本周/以后分类，每条加方框，删掉重复的。"</div></div>
+  <div style="display:flex;gap:13px;align-items:flex-start;"><div style="width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:#7FB98E;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-hand);font-size:16px;">3</div><div style="flex:1;padding-top:4px;font-size:15px;line-height:1.7;">它会把<strong>要改的地方标出来给你看</strong>，问你同不同意。你回"允许"，它才动手。</div></div>
+</div>
+
+<Terminal
+  command="claude"
+  title="它动手前，先给你看改动"
+  lines={[
+    { text: '✓ 已读取 待办.txt', color: '#8FC79E' },
+    { text: '我打算这样改，给你看改动 ↓', color: '#EDE3D0' },
+    { text: '  - 买牛奶   （重复，删一条）', color: '#E88B6F' },
+    { text: '  + 分成 今天 / 本周 / 以后 三类', color: '#9AD0A6' },
+    { text: '同意就回复“允许”，我才会动文件。', color: '#A89B84' },
+  ]}
+/>
+
+<Callout type="tip">
+🔒 这就是 Agent 最让人安心的地方：**动手前一定先把改动标给你看（绿色是加、红色是删），你不点"允许"，它绝不会碰你的文件。** 所以大胆试，改坏了也有得退。
+</Callout>
+
+<Callout type="same">
+用 <strong>Kimi Code</strong> 一样：启动 <code>kimi</code>，然后同样用大白话告诉它要改什么。
+</Callout>

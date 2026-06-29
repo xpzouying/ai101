@@ -4,8 +4,36 @@ building: 2
 chapter: 1
 order: 1
 kind: atom
-draft: true
-hook: 第一次装命令行工具有点怵？别怕，我陪你一步一步装好。
+hookMood: hi
+hook: 要在电脑上装个工具,第一次有点怵?<span class="hl-g">别怕,跟我三步装好,装错了也弄不坏电脑。</span>
 ---
 
-敬请期待。
+import Terminal from '../../../components/Terminal.astro';
+import Callout from '../../../components/Callout.astro';
+
+<Callout type="tip">
+先说句大实话:**Claude Code 需要一个 Claude 付费账号**(Pro / Max 等),免费版用不了,而且国内访问不太方便。如果你嫌麻烦,直接用下面标注框里的 **Kimi Code** 更省事——用法几乎一样,这一关照着做就行。
+</Callout>
+
+<div style="display:flex;flex-direction:column;gap:12px;margin:8px 0 22px;">
+  <div style="display:flex;gap:13px;align-items:flex-start;"><div style="width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:#7FB98E;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-hand);font-size:16px;">1</div><div style="flex:1;padding-top:4px;font-size:15px;line-height:1.7;">打开"终端"——那个黑黑的小窗口。<span style="color:#8A7860;font-size:13.5px;">（Mac 搜"终端"，Windows 搜"PowerShell"）</span></div></div>
+  <div style="display:flex;gap:13px;align-items:flex-start;"><div style="width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:#7FB98E;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-hand);font-size:16px;">2</div><div style="flex:1;padding-top:4px;font-size:15px;line-height:1.7;">把下面这<strong>一整行</strong>安装命令复制进去，按回车。</div></div>
+  <div style="display:flex;gap:13px;align-items:flex-start;"><div style="width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:#7FB98E;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-hand);font-size:16px;">3</div><div style="flex:1;padding-top:4px;font-size:15px;line-height:1.7;">等它自己跑完（几十秒），看到"完成"就装好了。</div></div>
+</div>
+
+<Terminal
+  command="curl -fsSL https://claude.ai/install.sh | bash"
+  title="你的终端 · 复制这行就行"
+  lines={[
+    { text: '正在下载并安装 Claude Code…', color: '#A89B84' },
+    { text: '✓ 安装完成!', color: '#8FC79E' },
+    { text: '输入 claude 就能启动啦 👇', color: '#EDE3D0' },
+  ]}
+/>
+
+装好后，在终端输入 <code style="background:#F4E2BE;padding:1px 7px;border-radius:6px;color:#9A6A2E;">claude --version</code> ，能看到一串版本号，就说明成功了。第一次运行 `claude` 它会让你在浏览器里登录一下，跟着提示点就行。
+
+<Callout type="same">
+**Windows** 把安装命令换成：<code>irm https://claude.ai/install.ps1 | iex</code>（在 PowerShell 里跑）。<br/>
+想用 **Kimi Code**?安装命令是 <code>curl -LsSf https://code.kimi.com/install.sh | bash</code>，启动用 <code>kimi</code>，后面每一关都通用。
+</Callout>
