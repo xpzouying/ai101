@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ai101-ivory.vercel.app/sitemap-index.xml
+Sitemap: https://ai101.haha.ai/sitemap-index.xml
