@@ -15,15 +15,15 @@ interface Props {
   next?: NavItem | null;
 }
 const { title, hook, building, pos, total, kind = 'atom', hookMood = 'think', prev, next } = Astro.props;
-const home = building === 1 ? '🏠 楼①' : '🏗️ 楼②';
+const bld = building === 1 ? '楼①' : '楼②';
 const theme = building === 1 ? 'orange' : 'green';
 const segs = Array.from({ length: total }, (_, i) => i + 1);
 ---
 <article class={`lesson theme-${theme}`}>
   <header class="lh">
     <div class="lh-row">
-      <span class="lh-where">{home} · 第 {pos} 关</span>
-      <span class="lh-prog">{kind === 'workshop' ? '🎉 合练关' : `闯关中 ${pos} / ${total}`}</span>
+      <a class="lh-back" href="/">← 🏠 闯关地图</a>
+      <span class="lh-where">{bld} · {kind === 'workshop' ? '🎉 合练关' : `第 ${pos} 关 · ${pos} / ${total}`}</span>
     </div>
     <div class="lh-bar">
       {segs.map((s) => (
@@ -61,6 +61,8 @@ const segs = Array.from({ length: total }, (_, i) => i + 1);
   .lesson { max-width: var(--measure); margin: 0 auto; padding-bottom: 40px; }
   .lh { position: sticky; top: 0; z-index: 5; background: rgba(251,243,228,0.92); backdrop-filter: blur(6px); padding: 14px 20px 12px; border-bottom: 1.5px dashed var(--c-border-dash); }
   .lh-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 9px; font-size: 13px; color: var(--c-ink-mute); }
+  .lh-back { display: inline-flex; align-items: center; gap: 5px; background: var(--c-card); border: 1.5px solid var(--c-border-dash); padding: 6px 13px 6px 11px; border-radius: var(--radius-pill); text-decoration: none; font-size: 13px; color: var(--c-ink-soft); white-space: nowrap; box-shadow: 0 2px 6px rgba(120,90,50,0.06); transition: border-color 0.15s; }
+  .lh-back:hover { border-color: var(--c-orange); }
   .lh-bar { display: flex; align-items: center; gap: 6px; }
   .seg { height: 8px; flex: 1; border-radius: var(--radius-pill); background: #EEE2CC; }
   .seg.done { background: var(--c-green); }
