@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ai101-ivory.vercel.app/sitemap-index.xml

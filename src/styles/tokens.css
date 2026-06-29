@@ -55,7 +55,7 @@
 
   /* —— 字体 —— */
   --font-hand: 'ZCOOL KuaiLe', cursive;                          /* 手写感标题 */
-  --font-body: 'LXGW WenKai', 'Noto Sans SC', sans-serif;        /* 圆润亲和正文(霞鹜文楷) */
+  --font-body: 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', sans-serif;  /* 圆润亲和正文(霞鹜文楷),回退系统中文字体 */
 
   /* —— 排版 —— */
   --measure: 720px;
