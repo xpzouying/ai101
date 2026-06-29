@@ -30,8 +30,9 @@ export async function getStaticPaths() {
 const { lesson, pos, total, prev, next } = Astro.props;
 const { Content } = await render(lesson);
 const d = lesson.data;
+const desc = d.hook.replace(/<[^>]+>/g, '');
 ---
-<BaseLayout title={`${d.title} · 泡芙小姐的 AI 101`}>
+<BaseLayout title={`${d.title} · 泡芙小姐的 AI 101`} description={desc}>
   <LessonTemplate
     title={d.title}
     hook={d.hook}

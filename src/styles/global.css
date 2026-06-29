@@ -1,5 +1,14 @@
 @import './tokens.css';
 
+/* 自托管标题字体(子集化,仅含站内用到的字形) */
+@font-face {
+  font-family: 'ZCOOL KuaiLe';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/zcool-kuaile.woff2') format('woff2');
+}
+
 * { box-sizing: border-box; }
 
 html, body { margin: 0; padding: 0; }
