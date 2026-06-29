@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Mascot from '../components/Mascot.astro';
+
+const sortFn = (a: any, b: any) =>
+  a.data.building - b.data.building || a.data.chapter - b.data.chapter || a.data.order - b.data.order;
+
+// 地图只列"碎关"(atom);合练关在闯关途中触达。草稿关显示为🔒敬请期待。
+const atoms = (await getCollection('lessons')).filter((l) => l.data.kind === 'atom').sort(sortFn);
+const firstOpen = atoms.find((l) => !l.data.draft)?.id;
+
+const buildings = [
+  { id: 1 as const, title: '🏠 楼① · 聊天 AI', tag: '全民', theme: 'orange' },
+  { id: 2 as const, title: '🏗️ 楼② · Agent 实操', tag: '进阶', theme: 'green' },
+];
+
+const perks = [
+  { icon: '✏️', t: '把话说清楚', s: '让 AI 听懂你要什么' },
+  { icon: '🧰', t: '让它帮你做完一件事', s: '不只聊天，而是交活' },
+  { icon: '🏗️', t: '上手 Agent 实操', s: '让 AI 在电脑上动手' },
+];
+---
+<BaseLayout title="泡芙小姐的 AI 101 课堂 · 一关一关,学会用 AI 干活">
+  <main>
+    <!-- 顶栏 -->
+    <div class="top">
+      <div class="brand">
+        <span class="logo">AI</span>
+        <span class="brand-name">泡芙小姐的 AI 101</span>
+      </div>
+      <span class="badge-pub">公益 · 免登录</span>
+    </div>
+
+    <!-- 英雄区 -->
+    <section class="hero">
+      <div class="hero-tape"></div>
+      <div class="hero-mascot"><Mascot mood="hi" size={118} /></div>
+      <div class="hero-text">
+        <h1>怕 AI?没事。<br />我们一关一关来。</h1>
+        <p>给产品、运营、设计、测试——<span class="hl-o">不懂技术,也能真正用 AI 把活干完。</span></p>
+        <div class="hero-say"><span>👋</span> 嗨,我是泡芙!跟着我,从零开始。</div>
+      </div>
+    </section>
+
+    <!-- 学完你就会 -->
+    <section class="perks">
+      <div class="perks-k">学完你就会——</div>
+      <div class="perks-row">
+        {perks.map((p) => (
+          <div class="perk">
+            <div class="perk-icon">{p.icon}</div>
+            <div class="perk-t">{p.t}</div>
+            <div class="perk-s">{p.s}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 闯关地图 -->
+    <div class="map-head">
+      <span class="map-title">闯关地图</span>
+      <span class="map-line"></span>
+      <span class="map-hint">一层一关,往上爬 ↑</span>
+    </div>
+
+    <div class="buildings">
+      {buildings.map((b) => {
+        const list = atoms.filter((l) => l.data.building === b.id);
+        const open = list.filter((l) => !l.data.draft).length;
+        return (
+          <section class={`bld bld-${b.theme}`}>
+            <div class="bld-head">
+              <div class="bld-row">
+                <span class="bld-title">{b.title}</span>
+                <span class="bld-tag">{b.tag}</span>
+              </div>
+              <div class="bld-prog">
+                <div class="bld-track"><div class="bld-fill" style={`width:${Math.round((open / list.length) * 100)}%`}></div></div>
+                <span class="bld-count">已上线 {open} / {list.length}</span>
+              </div>
+            </div>
+            <div class="bld-body">
+              {list.map((l, i) => {
+                const locked = l.data.draft;
+                const start = l.id === firstOpen;
+                return locked ? (
+                  <div class="lv lv-locked">
+                    <div class="lv-num">🔒</div>
+                    <div class="lv-meta"><div class="lv-k">第 {i + 1} 关</div><div class="lv-t">{l.data.title}</div></div>
+                    <span class="lv-chip lv-chip-soon">敬请期待</span>
+                  </div>
+                ) : (
+                  <a class={`lv ${start ? 'lv-start' : ''}`} href={`/lessons/${l.id}`}>
+                    <div class="lv-num">{i + 1}</div>
+                    <div class="lv-meta"><div class="lv-k">第 {i + 1} 关</div><div class="lv-t">{l.data.title}</div></div>
+                    {start && <span class="lv-chip lv-chip-start">从这里开始</span>}
+                  </a>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+
+    <p class="foot">泡芙陪你,一关一关来 · AI 101</p>
+  </main>
+</BaseLayout>
+
+<style>
+  main { max-width: 920px; margin: 0 auto; padding: 22px 20px 40px; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .logo { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-hand); font-size: 18px; color: #fff; background: var(--c-orange); width: 42px; height: 42px; border-radius: 13px; box-shadow: 0 4px 10px rgba(245,160,76,0.4); transform: rotate(-6deg); }
+  .brand-name { font-family: var(--font-hand); font-size: 20px; }
+  .badge-pub { font-size: 13px; color: var(--c-ink-mute); background: var(--c-card); border: 1.5px dashed var(--c-border-dash); padding: 5px 12px; border-radius: var(--radius-pill); }
+
+  .hero { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; background: var(--c-card); border: 1.5px solid var(--c-border); border-radius: 26px; padding: 22px 24px; box-shadow: var(--shadow-card); position: relative; overflow: hidden; margin-bottom: 18px; }
+  .hero-tape { position: absolute; top: -18px; left: 50%; width: 120px; height: 26px; background: rgba(127,185,142,0.32); transform: translateX(-50%) rotate(-3deg); }
+  .hero-mascot { width: 118px; flex: 0 0 auto; animation: pf-bob 4s ease-in-out infinite; }
+  .hero-text { flex: 1; min-width: 230px; }
+  .hero-text h1 { font-size: 30px; margin: 0 0 8px; }
+  .hero-text p { font-size: 15.5px; line-height: 1.7; margin: 0 0 12px; color: var(--c-ink-soft); }
+  .hero-say { display: inline-flex; align-items: center; gap: 8px; background: var(--c-after-1); border: 1.5px solid #F6D9A8; border-radius: 16px; padding: 9px 14px; font-size: 14px; color: var(--c-orange-deep); }
+
+  .perks { margin-bottom: 22px; }
+  .perks-k { font-size: 13px; color: var(--c-ink-mute); margin: 0 0 10px 4px; }
+  .perks-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .perk { flex: 1; min-width: 150px; background: var(--c-card); border: 1.5px solid var(--c-border); border-radius: 20px; padding: 15px 16px; box-shadow: var(--shadow-soft); }
+  .perk-icon { font-size: 24px; margin-bottom: 6px; }
+  .perk-t { font-size: 15px; font-weight: 600; color: var(--c-ink-strong); }
+  .perk-s { font-size: 13px; color: var(--c-ink-mute); margin-top: 3px; }
+
+  .map-head { display: flex; align-items: center; gap: 10px; margin: 0 0 14px 2px; }
+  .map-title { font-family: var(--font-hand); font-size: 20px; color: var(--c-ink-strong); }
+  .map-line { flex: 1; border-top: 2px dashed var(--c-border-dash); }
+  .map-hint { font-size: 13px; color: var(--c-ink-mute); }
+
+  .buildings { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start; }
+  .bld { flex: 1; min-width: 260px; background: var(--c-card); border: 1.5px solid var(--c-border); border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-card); }
+  .bld-head { padding: 16px 18px; color: #fff; }
+  .bld-orange .bld-head { background: linear-gradient(180deg, var(--c-orange-light), var(--c-orange)); }
+  .bld-green .bld-head { background: linear-gradient(180deg, var(--c-green-light), var(--c-green)); }
+  .bld-row { display: flex; align-items: center; justify-content: space-between; }
+  .bld-title { font-family: var(--font-hand); font-size: 19px; }
+  .bld-tag { font-size: 12px; background: rgba(255,255,255,0.28); padding: 3px 10px; border-radius: var(--radius-pill); }
+  .bld-prog { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+  .bld-track { flex: 1; height: 7px; background: rgba(255,255,255,0.35); border-radius: var(--radius-pill); overflow: hidden; }
+  .bld-fill { height: 100%; background: #fff; border-radius: var(--radius-pill); }
+  .bld-count { font-size: 12px; white-space: nowrap; }
+  .bld-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+
+  .lv { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 16px; text-decoration: none; }
+  .lv-start { background: var(--c-after-1); }
+  .lv-locked { opacity: 0.95; }
+  .lv-num { width: 34px; height: 34px; flex: 0 0 auto; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; }
+  .bld-orange .lv:not(.lv-locked) .lv-num { background: #fff; border: 3px solid var(--c-orange); color: var(--c-orange); }
+  .bld-green .lv:not(.lv-locked) .lv-num { background: #fff; border: 3px solid var(--c-green); color: var(--c-green-deep); }
+  .lv-start .lv-num { animation: pf-pulse 2s ease-in-out infinite; }
+  .lv-locked .lv-num { background: #EFE6D6; color: #B6A488; }
+  .lv-meta { flex: 1; min-width: 0; }
+  .lv-k { font-size: 11px; color: var(--c-ink-mute2); }
+  .lv-t { font-size: 15px; font-weight: 600; color: var(--c-ink-strong); }
+  .lv-locked .lv-t { color: #B6A488; }
+  .lv-chip { font-size: 12px; padding: 4px 10px; border-radius: var(--radius-pill); white-space: nowrap; }
+  .lv-chip-start { color: #fff; background: var(--c-orange); }
+  .lv-chip-soon { color: #B6A488; background: #F2EADB; }
+  .foot { text-align: center; padding: 26px 0 0; font-size: 13px; color: var(--c-ink-mute2); }
+</style>

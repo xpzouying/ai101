@@ -1,0 +1,88 @@
+---
+// 单关外壳:粘性头(楼/关 + 进度 + 分段进度条 + 标题) → ① 泡芙说烦恼 → ②③④(MDX 正文) → 上一关/下一关。
+import Mascot from './Mascot.astro';
+import TermModal from './TermModal.astro';
+interface NavItem { slug: string; title: string; }
+interface Props {
+  title: string;
+  hook: string;
+  building: 1 | 2;
+  pos: number;          // 本章第几关
+  total: number;        // 本章共几关
+  kind?: 'atom' | 'workshop';
+  hookMood?: 'hi' | 'think' | 'aha' | 'clap';
+  prev?: NavItem | null;
+  next?: NavItem | null;
+}
+const { title, hook, building, pos, total, kind = 'atom', hookMood = 'think', prev, next } = Astro.props;
+const home = building === 1 ? '🏠 楼①' : '🏗️ 楼②';
+const theme = building === 1 ? 'orange' : 'green';
+const segs = Array.from({ length: total }, (_, i) => i + 1);
+---
+<article class={`lesson theme-${theme}`}>
+  <header class="lh">
+    <div class="lh-row">
+      <span class="lh-where">{home} · 第 {pos} 关</span>
+      <span class="lh-prog">{kind === 'workshop' ? '🎉 合练关' : `闯关中 ${pos} / ${total}`}</span>
+    </div>
+    <div class="lh-bar">
+      {segs.map((s) => (
+        <span class={`seg ${s < pos ? 'done' : s === pos ? 'cur' : 'todo'}`}></span>
+      ))}
+    </div>
+    <h1 class="lh-title">{title}</h1>
+  </header>
+
+  <div class="lh-pad">
+    <!-- ① 你现在的烦恼 -->
+    <div class="hook">
+      <div class="hook-mascot"><Mascot mood={hookMood} size={78} /></div>
+      <div class="hook-bubble" set:html={hook}></div>
+    </div>
+
+    <!-- ②③④ 由 MDX 正文提供 -->
+    <slot />
+
+    <!-- 上一关 / 下一关 -->
+    <nav class="lnav">
+      {prev ? (
+        <a class="lnav-prev" href={`/lessons/${prev.slug}`}><div class="lnav-k">← 上一关</div><div class="lnav-t">{prev.title}</div></a>
+      ) : <span></span>}
+      {next ? (
+        <a class="lnav-next" href={`/lessons/${next.slug}`}><div class="lnav-k">下一关 →</div><div class="lnav-t">{next.title}</div></a>
+      ) : <span></span>}
+    </nav>
+  </div>
+
+  <TermModal />
+</article>
+
+<style>
+  .lesson { max-width: var(--measure); margin: 0 auto; padding-bottom: 40px; }
+  .lh { position: sticky; top: 0; z-index: 5; background: rgba(251,243,228,0.92); backdrop-filter: blur(6px); padding: 14px 20px 12px; border-bottom: 1.5px dashed var(--c-border-dash); }
+  .lh-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 9px; font-size: 13px; color: var(--c-ink-mute); }
+  .lh-bar { display: flex; align-items: center; gap: 6px; }
+  .seg { height: 8px; flex: 1; border-radius: var(--radius-pill); background: #EEE2CC; }
+  .seg.done { background: var(--c-green); }
+  .seg.cur { flex: 1.4; }
+  .theme-orange .seg.cur { background: var(--c-orange); }
+  .theme-green .seg.cur { background: var(--c-green); }
+  .theme-green .seg.todo { background: #E3EFE5; }
+  .lh-title { font-size: 25px; margin: 11px 0 0; }
+  .lh-pad { padding: 20px 20px 0; }
+
+  .hook { display: flex; align-items: flex-start; gap: 14px; margin: 8px 0 26px; }
+  .hook-mascot { width: 78px; flex: 0 0 auto; }
+  .hook-bubble { flex: 1; min-width: 0; background: var(--c-card); border: 1.5px solid var(--c-border); border-radius: 18px; border-top-left-radius: 4px; padding: 14px 16px; font-size: 15.5px; line-height: 1.7; box-shadow: var(--shadow-soft); }
+
+  .lnav { display: flex; align-items: stretch; justify-content: space-between; gap: 10px; margin-top: 30px; }
+  .lnav a { flex: 1; text-decoration: none; border-radius: 16px; padding: 11px 14px; }
+  .lnav-prev { background: var(--c-card); border: 1.5px solid var(--c-border); }
+  .lnav-next { text-align: right; box-shadow: 0 6px 14px rgba(245,160,76,0.3); }
+  .theme-orange .lnav-next { background: var(--c-orange); }
+  .theme-green .lnav-next { background: var(--c-green); box-shadow: 0 6px 14px rgba(127,185,142,0.3); }
+  .lnav-k { font-size: 11px; color: var(--c-ink-mute2); }
+  .lnav-prev .lnav-t { font-size: 14px; font-weight: 600; color: var(--c-ink-strong); }
+  .lnav-next .lnav-k { color: rgba(255,255,255,0.85); }
+  .lnav-next .lnav-t { font-size: 14px; font-weight: 600; color: #fff; }
+</style>

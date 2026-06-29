@@ -1,0 +1,46 @@
+---
+title: 一次问到位
+building: 1
+chapter: 1
+order: 4
+kind: atom
+hookMood: think
+hook: 跟 AI 来回扯了十几轮还没搞定？<span class="hl-o">其实一句话就能把要求一次说全。</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="挤牙膏式" afterLabel="一次说全">
+  <div slot="before">
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <div style="background:#E4DDD0;color:#6A5E4C;padding:8px 12px;border-radius:14px;font-size:13.5px;max-width:80%;">写个活动标题</div>
+      <div style="background:#E4DDD0;color:#6A5E4C;padding:8px 12px;border-radius:14px;font-size:13.5px;max-width:80%;">短一点</div>
+      <div style="background:#E4DDD0;color:#6A5E4C;padding:8px 12px;border-radius:14px;font-size:13.5px;max-width:80%;">再活泼点</div>
+      <div style="background:#E4DDD0;color:#6A5E4C;padding:8px 12px;border-radius:14px;font-size:13.5px;max-width:80%;">加个数字……</div>
+    </div>
+    <div style="margin-top:10px;font-size:12px;color:#B07B4E;text-align:center;">😮‍💨 来回八轮，人都累了</div>
+  </div>
+  <div slot="after">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><div style="background:#F5A04C;color:#fff;padding:9px 13px;border-radius:15px;border-top-right-radius:4px;font-size:13.5px;max-width:90%;line-height:1.55;">写 10 个公众号标题：活泼、带数字、20 字内，给职场新人看</div></div>
+    <div style="display:flex;gap:8px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#7FB98E;"></div><div style="background:#fff;color:#4A3A2C;padding:10px 13px;border-radius:15px;border-top-left-radius:4px;font-size:13.5px;line-height:1.65;max-width:84%;box-shadow:0 3px 10px rgba(120,90,50,0.08);">1. 入职 7 天，我踩过的 5 个坑<br/>2. 月薪 8k 的新人，都在偷偷做这 3 件事<br/>……<div style="margin-top:8px;font-size:12px;color:#5FA071;">✅ 一步到位，直接能用</div></div></div>
+  </div>
+  <span slot="caption">把"角色 + 任务 + 格式 + 限制"一次给全</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+这种"一次把要求说全"的提示词，叫 <Term id="structured">「结构化提示」</Term>。<span class="hl-g">想清楚再一次问</span>，比来回挤牙膏省一半时间。
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`角色：你是【资深公众号文案】
+任务：帮我【写 10 个活动标题】
+要求：【活泼、带数字、20 字内】
+给谁看：【职场新人】`}>
+  <span slot="intro">照着这四行"一次说全"的骨架填，发给 AI：</span>
+</TryThis>

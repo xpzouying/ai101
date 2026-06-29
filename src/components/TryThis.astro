@@ -1,0 +1,40 @@
+---
+// ④ 你去试一下 —— 现成提示词 + 一键复制。
+// intro 插槽 = 上面那句引导;prompt = 暗色框里可复制的整段提示词。
+interface Props { prompt: string; }
+const { prompt } = Astro.props;
+---
+<div class="try">
+  <div class="try-intro"><slot name="intro">现在打开你常用的 AI,把下面这段直接发给它:</slot></div>
+  <pre class="try-prompt" data-prompt>{prompt}</pre>
+  <button type="button" class="try-copy" data-copy>📋 一键复制这段</button>
+</div>
+
+<style>
+  .try { background: var(--c-card); border: 1.5px solid var(--c-border); border-radius: 20px; padding: 16px; box-shadow: var(--shadow-soft); }
+  .try-intro { font-size: 14.5px; line-height: 1.7; margin-bottom: 12px; }
+  .try-prompt {
+    background: #3A352F; color: #F4EBDA; border-radius: 14px; padding: 15px;
+    font-size: 13.5px; line-height: 1.85; white-space: pre-wrap; font-family: var(--font-body);
+    margin: 0;
+  }
+  .try-copy {
+    margin-top: 12px; width: 100%; border: none; cursor: pointer; font-family: var(--font-hand);
+    font-size: 16px; color: #fff; background: var(--c-orange); padding: 12px; border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(245,160,76,0.32); transition: background 0.2s;
+  }
+  .try-copy.done { background: var(--c-green); }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const pre = btn.parentElement!.querySelector<HTMLElement>('[data-prompt]');
+      const text = pre?.textContent || '';
+      navigator.clipboard?.writeText(text).catch(() => {});
+      btn.textContent = '✓ 已复制,去粘给 AI 吧！';
+      btn.classList.add('done');
+      setTimeout(() => { btn.textContent = '📋 一键复制这段'; btn.classList.remove('done'); }, 1800);
+    });
+  });
+</script>

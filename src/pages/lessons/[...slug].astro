@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LessonTemplate from '../../components/LessonTemplate.astro';
+
+export async function getStaticPaths() {
+  const sortFn = (a: any, b: any) =>
+    a.data.building - b.data.building || a.data.chapter - b.data.chapter || a.data.order - b.data.order;
+  const lessons = (await getCollection('lessons')).filter((l) => !l.data.draft).sort(sortFn);
+
+  return lessons.map((lesson, i) => {
+    // 本章(同楼 + 同章)内的位置与总数,驱动分段进度条
+    const group = lessons.filter(
+      (l) => l.data.building === lesson.data.building && l.data.chapter === lesson.data.chapter
+    );
+    const pos = group.findIndex((l) => l.id === lesson.id) + 1;
+    return {
+      params: { slug: lesson.id },
+      props: {
+        lesson,
+        pos,
+        total: group.length,
+        prev: i > 0 ? { slug: lessons[i - 1].id, title: lessons[i - 1].data.title } : null,
+        next: i < lessons.length - 1 ? { slug: lessons[i + 1].id, title: lessons[i + 1].data.title } : null,
+      },
+    };
+  });
+}
+
+const { lesson, pos, total, prev, next } = Astro.props;
+const { Content } = await render(lesson);
+const d = lesson.data;
+---
+<BaseLayout title={`${d.title} · 泡芙小姐的 AI 101`}>
+  <LessonTemplate
+    title={d.title}
+    hook={d.hook}
+    building={d.building}
+    pos={pos}
+    total={total}
+    kind={d.kind}
+    hookMood={d.hookMood}
+    prev={prev}
+    next={next}
+  >
+    <Content />
+  </LessonTemplate>
+</BaseLayout>

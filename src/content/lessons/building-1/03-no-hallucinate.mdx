@@ -1,0 +1,45 @@
+---
+title: 让它别瞎编
+building: 1
+chapter: 1
+order: 3
+kind: atom
+hookMood: think
+hook: 嗨，你是不是也遇过——问 AI 一个问题，它 <span class="hl-o">一本正经地胡说八道</span>？看起来好有道理，一查全是编的。
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线，看看差别 →" />
+
+<BeforeAfter beforeLabel="没给要求的时候" afterLabel="加了一句要求之后">
+  <div slot="before">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><div style="background:#E4DDD0;color:#6A5E4C;padding:9px 13px;border-radius:15px;border-top-right-radius:4px;font-size:14px;max-width:80%;">帮我查一下竞品的价格</div></div>
+    <div style="display:flex;gap:8px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#D8CFBE;"></div><div style="background:#fff;color:#8A7C66;padding:10px 13px;border-radius:15px;border-top-left-radius:4px;font-size:13.5px;line-height:1.65;max-width:84%;">市面上价格从几十到几千不等，要看品牌、型号和渠道……<div style="margin-top:8px;font-size:12px;color:#B07B4E;">😶 听着都对，其实等于没答</div></div></div>
+  </div>
+  <div slot="after">
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;margin-bottom:10px;">
+      <div style="background:#F5A04C;color:#fff;padding:9px 13px;border-radius:15px;border-top-right-radius:4px;font-size:14px;max-width:88%;">帮我查竞品价格</div>
+      <div style="background:#FCEBCF;color:#9A6A2E;padding:7px 11px;border-radius:12px;font-size:12.5px;max-width:90%;line-height:1.55;">+ 查 A / B / C 三家、要表格、不确定就说不知道</div>
+    </div>
+    <div style="display:flex;gap:8px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#7FB98E;"></div><div style="background:#fff;color:#4A3A2C;padding:10px 13px;border-radius:15px;border-top-left-radius:4px;font-size:13.5px;line-height:1.65;max-width:84%;box-shadow:0 3px 10px rgba(120,90,50,0.08);">我列了 A / B / C 三家的套餐价与链接（标了查询日期）；其中 C 家没公开价格，我没猜。<div style="margin-top:8px;font-size:12px;color:#5FA071;">✅ 照着你的情况答</div></div></div>
+  </div>
+  <span slot="caption">差别就在于：你多说了一句"不确定就说不知道"</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+你刚才多说的那句话，有个名字，叫 <Term id="context">「上下文」</Term>。而你发给 AI 的整段话，叫 <Term id="prompt" tone="orange">「提示词」</Term>。至于它编的那些——叫 <Term id="hallucinate" tone="orange">「胡编」</Term>。<span style="color:#9A876F;font-size:13.5px;">（点一下高亮的词，看看什么意思）</span>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`你是我的研究助手。请帮我查——【你的问题】。
+要求：
+1. 不确定的地方直接说"我不确定"，别猜；
+2. 能给出来源 / 出处的，附在后面；
+3. 区分哪些是事实、哪些是你的推测。`}>
+  <span slot="intro">现在打开你常用的 AI，把下面这段直接发给它（把【】里换成你的问题）：</span>
+</TryThis>

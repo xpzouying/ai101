@@ -1,0 +1,85 @@
+---
+// 术语卡弹层(全站一个,放在关卡外壳里)。所有 <Term id> 点击都由它统一弹出。
+// 把所有术语数据打成 JSON 内嵌,前端按 id 查表渲染,支持「相关词」互跳。
+import { getCollection } from 'astro:content';
+const terms = await getCollection('terms');
+const map: Record<string, any> = {};
+for (const t of terms) {
+  map[t.id] = {
+    term: t.data.term,
+    what: t.data.whatItIs,
+    change: t.data.behaviorChange,
+    example: t.data.example ?? '',
+    related: t.data.related ?? [],
+  };
+}
+---
+<script type="application/json" id="pf-terms" set:html={JSON.stringify(map)}></script>
+
+<div class="tm-overlay" id="pf-term-overlay" hidden>
+  <div class="tm-card" role="dialog" aria-modal="true">
+    <div class="tm-tape"></div>
+    <button type="button" class="tm-close" aria-label="关闭">✕</button>
+    <div class="tm-kicker">术语卡</div>
+    <div class="tm-title" id="pf-term-title"></div>
+    <div class="tm-sec"><div class="tm-k">是什么</div><div id="pf-term-what"></div></div>
+    <div class="tm-sec tm-sec-hi"><div class="tm-k">它怎么改变 AI</div><div id="pf-term-change"></div></div>
+    <div class="tm-sec" id="pf-term-example-wrap"><div class="tm-k">一个例子</div><div id="pf-term-example"></div></div>
+    <div class="tm-related" id="pf-term-related" hidden><span class="tm-k">相关词：</span><span id="pf-term-related-list"></span></div>
+  </div>
+</div>
+
+<style>
+  .tm-overlay { position: fixed; inset: 0; z-index: 60; background: rgba(58,44,30,0.32); display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .tm-overlay[hidden] { display: none; }   /* 让 hidden 压过上面的 display:flex,否则关不掉 */
+  .tm-card { position: relative; width: 100%; max-width: 340px; background: var(--c-term-card); border: 1.5px solid #F0E3C2; border-radius: 18px; padding: 22px 20px 18px; box-shadow: var(--shadow-pop); transform: rotate(-2deg); animation: pf-pop 0.18s ease-out; }
+  .tm-tape { position: absolute; top: -13px; left: 50%; width: 96px; height: 24px; background: var(--c-tape); transform: translateX(-50%) rotate(-2deg); }
+  .tm-close { position: absolute; top: 12px; right: 12px; border: none; background: #F0E3C2; color: var(--c-orange-deep); width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 14px; }
+  .tm-kicker { font-size: 12px; color: var(--c-orange-deep); margin-bottom: 2px; }
+  .tm-title { font-family: var(--font-hand); font-size: 23px; color: var(--c-ink-strong); margin-bottom: 14px; }
+  .tm-sec { margin-bottom: 12px; }
+  .tm-sec-hi { background: #FFF4E0; border-radius: 12px; padding: 11px 13px; }
+  .tm-k { font-size: 12px; color: var(--c-ink-mute); margin-bottom: 3px; }
+  .tm-related { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .tm-related[hidden] { display: none; }
+  .tm-chip { font-size: 13px; color: var(--c-green-deep); background: #EAF6EE; padding: 4px 11px; border-radius: var(--radius-pill); cursor: pointer; border: none; }
+</style>
+
+<script>
+  const data = JSON.parse(document.getElementById('pf-terms')?.textContent || '{}');
+  const overlay = document.getElementById('pf-term-overlay')!;
+  const $ = (id: string) => document.getElementById(id)!;
+
+  function open(id: string) {
+    const t = data[id];
+    if (!t) return;
+    $('pf-term-title').textContent = t.term;
+    $('pf-term-what').textContent = t.what;
+    $('pf-term-change').textContent = t.change;
+    const exWrap = $('pf-term-example-wrap');
+    if (t.example) { exWrap.hidden = false; $('pf-term-example').textContent = t.example; } else { exWrap.hidden = true; }
+    const relWrap = $('pf-term-related');
+    const relList = $('pf-term-related-list');
+    relList.innerHTML = '';
+    const rels = (t.related || []).filter((r: string) => data[r]);
+    if (rels.length) {
+      relWrap.hidden = false;
+      for (const r of rels) {
+        const b = document.createElement('button');
+        b.className = 'tm-chip'; b.textContent = data[r].term;
+        b.addEventListener('click', () => open(r));
+        relList.appendChild(b);
+      }
+    } else { relWrap.hidden = true; }
+    overlay.hidden = false;
+  }
+  function close() { overlay.hidden = true; }
+
+  document.addEventListener('click', (e) => {
+    const trigger = (e.target as HTMLElement).closest('[data-term-id]');
+    if (trigger) { open(trigger.getAttribute('data-term-id')!); }
+  });
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  overlay.querySelector('.tm-close')!.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+</script>

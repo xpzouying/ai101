@@ -1,0 +1,46 @@
+---
+title: 把话说清楚
+building: 1
+chapter: 1
+order: 1
+kind: atom
+hookMood: think
+hook: 你跟 AI 说"帮我写个东西"，写出来的却总不是你要的？<span class="hl-o">问题多半不在它，在那句话。</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+import Callout from '../../../components/Callout.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="只说一句话" afterLabel="说清楚之后">
+  <div slot="before">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><div style="background:#E4DDD0;color:#6A5E4C;padding:9px 13px;border-radius:15px;border-top-right-radius:4px;font-size:14px;max-width:80%;">帮我写条朋友圈</div></div>
+    <div style="display:flex;gap:8px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#D8CFBE;"></div><div style="background:#fff;color:#8A7C66;padding:10px 13px;border-radius:15px;border-top-left-radius:4px;font-size:13.5px;line-height:1.65;max-width:84%;">"今天天气不错，心情很好，愿大家都有美好的一天！"<div style="margin-top:8px;font-size:12px;color:#B07B4E;">😶 像谁都能发，不像你</div></div></div>
+  </div>
+  <div slot="after">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><div style="background:#F5A04C;color:#fff;padding:9px 13px;border-radius:15px;border-top-right-radius:4px;font-size:14px;max-width:88%;line-height:1.5;">帮我写条朋友圈：周末爬山、轻松幽默、带点 emoji、3 行内</div></div>
+    <div style="display:flex;gap:8px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#7FB98E;"></div><div style="background:#fff;color:#4A3A2C;padding:10px 13px;border-radius:15px;border-top-left-radius:4px;font-size:13.5px;line-height:1.65;max-width:84%;box-shadow:0 3px 10px rgba(120,90,50,0.08);">爬到山顶才发现，腿是借来的 🥵⛰️<br/>但风景确实没骗我。<br/>下周还去吗？在线等，挺急的 😆<div style="margin-top:8px;font-size:12px;color:#5FA071;">✅ 有画面、有梗，像你发的</div></div></div>
+  </div>
+  <span slot="caption">你说得越具体，它越懂你</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+你发给 AI 的那整段话，叫 <Term id="prompt" tone="orange">「提示词」</Term>。同一个 AI，提示词说得越具体，答得越准——<span class="hl-g">差别全在你怎么开口</span>。<span style="color:#9A876F;font-size:13.5px;">（点高亮词看看什么意思）</span>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`帮我写【要写什么，比如一条朋友圈 / 一封邮件】。
+给谁看：【谁，比如同事 / 客户 / 朋友】
+语气：【正式 / 轻松 / 幽默…】
+长度：【多长，比如 3 行内 / 100 字左右】`}>
+  <span slot="intro">把下面这个"说清楚"的小模板填一填，发给 AI——感受一下它立刻不一样了：</span>
+</TryThis>
+
+<Callout type="same">
+全程我们用 <strong>Kimi</strong> 做示范；你用 <strong>豆包 / DeepSeek / ChatGPT</strong> 都一样，长得差不多。
+</Callout>

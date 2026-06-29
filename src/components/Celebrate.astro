@@ -1,0 +1,56 @@
+---
+// 合练关收尾:撒花通关。点按钮 → 纸屑 + 「已通关」印章 + 泡芙鼓掌文案。
+interface Props { title?: string; sub?: string; }
+const {
+  title = '你已经能独立做完这件事了！',
+  sub = '这就是你自己用 AI 做出来的。下次遇到别的活,同样的招也能用。',
+} = Astro.props;
+---
+<div class="celebrate" data-celebrate>
+  <div class="cb-stamp" hidden>已通关</div>
+  <div class="cb-title" data-pre="准备好了吗？" data-done={title}>准备好了吗？</div>
+  <div class="cb-sub" data-pre="点下面的按钮,完成这一关。" data-done={sub}>点下面的按钮,完成这一关。</div>
+  <button type="button" class="cb-btn" data-go>🎉 撒花,我做到了！</button>
+  <div class="cb-confetti" aria-hidden="true"></div>
+</div>
+
+<style>
+  .celebrate { position: relative; text-align: center; background: linear-gradient(180deg, var(--c-after-1), var(--c-after-2)); border: 1.5px solid #F2DFB6; border-radius: 24px; padding: 26px 22px; overflow: hidden; }
+  .cb-stamp { position: absolute; top: 14px; right: 16px; font-family: var(--font-hand); font-size: 22px; color: #D2664A; border: 3px solid #D2664A; border-radius: 12px; padding: 4px 12px; transform: rotate(-14deg); animation: pf-stamp 0.5s ease-out; opacity: 0.92; }
+  .cb-title { font-family: var(--font-hand); font-size: 22px; color: var(--c-ink-strong); margin-bottom: 6px; }
+  .cb-sub { font-size: 14px; color: var(--c-ink-soft); line-height: 1.7; margin: 0 auto 18px; max-width: 340px; }
+  .cb-btn { border: none; cursor: pointer; font-family: var(--font-hand); font-size: 18px; color: #fff; background: var(--c-orange); padding: 13px 30px; border-radius: 16px; box-shadow: 0 8px 18px rgba(245,160,76,0.35); }
+  .cb-confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .cb-confetti :global(i) { position: absolute; top: -20px; display: block; animation: pf-fall linear forwards; }
+</style>
+
+<script>
+  const COLORS = ['#F5A04C', '#7FB98E', '#F6D389', '#F2A6A0', '#ffffff', '#E8893A'];
+  document.querySelectorAll<HTMLElement>('[data-celebrate]').forEach((box) => {
+    const btn = box.querySelector<HTMLButtonElement>('[data-go]')!;
+    btn.addEventListener('click', () => {
+      if (box.dataset.fired) return;
+      box.dataset.fired = '1';
+      const stamp = box.querySelector<HTMLElement>('.cb-stamp')!;
+      const title = box.querySelector<HTMLElement>('.cb-title')!;
+      const sub = box.querySelector<HTMLElement>('.cb-sub')!;
+      stamp.hidden = false;
+      title.textContent = title.dataset.done || '';
+      sub.textContent = sub.dataset.done || '';
+      btn.textContent = '🎊 太棒了！';
+      const wrap = box.querySelector<HTMLElement>('.cb-confetti')!;
+      for (let i = 0; i < 44; i++) {
+        const c = document.createElement('i');
+        const sz = 7 + Math.round(Math.random() * 9);
+        c.style.left = Math.round(Math.random() * 100) + '%';
+        c.style.width = sz + 'px';
+        c.style.height = sz + 'px';
+        c.style.background = COLORS[i % COLORS.length];
+        c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        c.style.animationDuration = (1.6 + Math.random() * 1.4).toFixed(2) + 's';
+        c.style.animationDelay = (Math.random() * 0.5).toFixed(2) + 's';
+        wrap.appendChild(c);
+      }
+    });
+  });
+</script>

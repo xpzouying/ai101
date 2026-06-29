@@ -1,0 +1,43 @@
+---
+title: 让它换个说法
+building: 1
+chapter: 1
+order: 5
+kind: atom
+hookMood: hi
+hook: 答案方向对，就是语气或长短不太对？<span class="hl-o">别重写，让它接着改就好。</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="不满意就从头来" afterLabel="直接让它改">
+  <div slot="before">
+    <div style="display:flex;gap:8px;margin-bottom:10px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#D8CFBE;"></div><div style="background:#fff;color:#8A7C66;padding:10px 13px;border-radius:15px;border-top-left-radius:4px;font-size:13.5px;line-height:1.65;max-width:84%;">尊敬的各位用户，兹定于本周六举办……</div></div>
+    <div style="display:flex;justify-content:flex-end;"><div style="background:#E4DDD0;color:#6A5E4C;padding:8px 12px;border-radius:14px;font-size:13.5px;max-width:80%;">太正式了…算了我自己重写个提示词吧</div></div>
+    <div style="margin-top:10px;font-size:12px;color:#B07B4E;text-align:center;">😮‍💨 又从零开始</div>
+  </div>
+  <div slot="after">
+    <div style="display:flex;gap:8px;margin-bottom:8px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#D8CFBE;"></div><div style="background:#fff;color:#8A7C66;padding:9px 12px;border-radius:14px;font-size:13px;line-height:1.6;max-width:84%;">尊敬的各位用户，兹定于……</div></div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:8px;"><div style="background:#F5A04C;color:#fff;padding:8px 12px;border-radius:14px;font-size:13.5px;max-width:85%;">太正式了，换成轻松口语、短一半</div></div>
+    <div style="display:flex;gap:8px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#7FB98E;"></div><div style="background:#fff;color:#4A3A2C;padding:10px 13px;border-radius:15px;border-top-left-radius:4px;font-size:13.5px;line-height:1.65;max-width:84%;box-shadow:0 3px 10px rgba(120,90,50,0.08);">周六有个活动，来玩呀～详情戳下方 👇<div style="margin-top:8px;font-size:12px;color:#5FA071;">✅ 一句话就改好了</div></div></div>
+  </div>
+  <span slot="caption">不满意就反馈，它会在原稿上接着改</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+这种"基于上一版接着改"的过程，叫 <Term id="iterate">「迭代」</Term>。<span class="hl-g">不用从头来</span>——一句"太长了""换个语气"就够了。
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`太长了，压到一半。
+太正式了，换成轻松口语。
+第 2 点不对，只重写那一点，别动其他。
+再给我 3 个不同风格的版本。`}>
+  <span slot="intro">对 AI 的回答不满意？直接发这类"修改指令"，挑一句用，不用从头来：</span>
+</TryThis>
