@@ -13,6 +13,7 @@ const firstOpen = atoms.find((l) => !l.data.draft)?.id;
 const buildings = [
   { id: 1 as const, title: '🏠 楼① · 聊天 AI', tag: '全民', theme: 'orange' },
   { id: 2 as const, title: '🏗️ 楼② · Agent 实操', tag: '进阶', theme: 'green' },
+  { id: 3 as const, title: '👀 楼③ · 让 AI 看见你', tag: '运营向', theme: 'berry' },
 ];
 
 const perks = [
@@ -144,6 +145,7 @@ const perks = [
   .bld-head { padding: 16px 18px; color: #fff; }
   .bld-orange .bld-head { background: linear-gradient(180deg, var(--c-orange-light), var(--c-orange)); }
   .bld-green .bld-head { background: linear-gradient(180deg, var(--c-green-light), var(--c-green)); }
+  .bld-berry .bld-head { background: linear-gradient(180deg, var(--c-berry-light), var(--c-berry)); }
   .bld-row { display: flex; align-items: center; justify-content: space-between; }
   .bld-title { font-family: var(--font-hand); font-size: 19px; }
   .bld-tag { font-size: 12px; background: rgba(255,255,255,0.28); padding: 3px 10px; border-radius: var(--radius-pill); }
@@ -159,6 +161,7 @@ const perks = [
   .lv-num { width: 34px; height: 34px; flex: 0 0 auto; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; }
   .bld-orange .lv:not(.lv-locked) .lv-num { background: #fff; border: 3px solid var(--c-orange); color: var(--c-orange); }
   .bld-green .lv:not(.lv-locked) .lv-num { background: #fff; border: 3px solid var(--c-green); color: var(--c-green-deep); }
+  .bld-berry .lv:not(.lv-locked) .lv-num { background: #fff; border: 3px solid var(--c-berry); color: var(--c-berry-deep); }
   .lv-start .lv-num { animation: pf-pulse 2s ease-in-out infinite; }
   .lv-locked .lv-num { background: #EFE6D6; color: #B6A488; }
   .lv-meta { flex: 1; min-width: 0; }

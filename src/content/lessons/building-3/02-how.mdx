@@ -1,0 +1,54 @@
+---
+title: 怎么让 AI 看懂你、愿意推荐你
+building: 3
+chapter: 1
+order: 2
+kind: atom
+hookMood: think
+hook: 知道了 AI 可见性，那怎么让 AI 愿意推荐你?<span class="hl-o">好消息:有几招在研究里被验证过有效，而且不用懂技术。</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+import Callout from '../../../components/Callout.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="AI 没东西可引" afterLabel="AI 引得到你" height={250}>
+  <div slot="before">
+    <div style="font-size:14px;color:#8A7C66;line-height:1.85;">你的网站:一张炫酷大图 + "立即试用"按钮，产品说明藏在登录后、或全是图片。<div style="margin-top:10px;font-size:12px;color:#B07B4E;">😶 AI 读不到一句"你是干嘛的"，自然不会提你</div></div>
+  </div>
+  <div slot="after">
+    <div style="font-size:14px;color:#4A3A2C;line-height:1.85;">加一个<strong>公开、纯文字、AI 能读</strong>的页面:一句话定位 ＋ 和竞品的对比表 ＋ 几条带真实数字的结果 ＋ 真实用户原话。<div style="margin-top:10px;font-size:12px;color:#5FA071;">✅ AI 回答相关问题时，开始把你算进去</div></div>
+  </div>
+  <span slot="caption">给 AI 可引用的"干货"，它才会引用你</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+提升 <Term id="geo">「AI 可见性」</Term>，有三招是被普林斯顿等机构的研究<span class="hl-g">在实验里验证过有效</span>的:
+
+<div style="display:flex;flex-direction:column;gap:8px;margin:14px 0;">
+  <div style="background:#FFFBF3;border:1.5px solid #EFE0C6;border-radius:14px;padding:11px 14px;font-size:14px;"><strong>① 放真实数据</strong> —— 研究里平均约 <strong style="color:#A85F88;">+41%</strong></div>
+  <div style="background:#FFFBF3;border:1.5px solid #EFE0C6;border-radius:14px;padding:11px 14px;font-size:14px;"><strong>② 引用权威来源</strong> —— 对原本不显眼的内容，提升尤其明显</div>
+  <div style="background:#FFFBF3;border:1.5px solid #EFE0C6;border-radius:14px;padding:11px 14px;font-size:14px;"><strong>③ 放真实原话 / 用户证言</strong> —— 约 <strong style="color:#A85F88;">+28%</strong></div>
+</div>
+
+<p style="font-size:12px;color:#9A876F;margin:-2px 0 14px;">这些是一项研究的平均结果，实际因人而异，别当成保证。</p>
+
+再配上:**结构清晰**(标题、对比表、要点列表)、把"你是谁/做什么/好在哪"讲明白、争取被**第三方媒体和社区提到**、内容**公开别锁在登录后**。
+
+<Callout type="tip">
+**进阶,但要诚实**:有个叫 `llms.txt` 的"给 AI 读的网站说明书",成本极低、做了不亏。但**目前主流 AI 大多还没真正抓取它**,别指望"做了 AI 就会读你"。先把上面的"说人话 + 真凭据"做好,性价比高得多。
+</Callout>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`请帮我写一段 150 字、纯文字的产品介绍：
+- 我是做什么的、给谁用、和同类比好在哪；
+- 包含 2 个真实数字、1 句真实用户原话(我等下补真的)；
+- 结构清晰、便于别人快速引用。`}>
+  <span slot="intro">让 AI 先帮你起个稿，改成真实内容后，放到网站一个公开页面上:</span>
+</TryThis>

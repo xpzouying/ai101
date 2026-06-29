@@ -1,0 +1,45 @@
+---
+title: 现在大家开始问 AI，而不是搜索
+building: 3
+chapter: 1
+order: 1
+kind: atom
+hookMood: aha
+hook: 以前找东西先打开搜索引擎；现在越来越多人直接问 AI"哪个好""谁更专业"——<span class="hl-o">这正在悄悄改变你的生意。</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+import Callout from '../../../components/Callout.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="旧玩法" afterLabel="新玩法">
+  <div slot="before">
+    <div style="font-size:14px;color:#8A7C66;line-height:1.85;">用户打开搜索引擎，一条条翻结果。<br/><br/>于是你砸钱做 SEO(搜索引擎优化，就是想方设法让网站排到搜索结果前面)，拼命想挤进<strong>前 10 名</strong>。<div style="margin-top:10px;font-size:12px;color:#B07B4E;">😮‍💨 排名战，越来越贵</div></div>
+  </div>
+  <div slot="after">
+    <div style="font-size:14px;color:#4A3A2C;line-height:1.85;">用户直接问 AI:"适合奶茶店的记账软件是哪个?"<br/><br/>AI 直接甩给他<strong>一个推荐</strong>——他可能根本不再去翻搜索结果了。<div style="margin-top:10px;font-size:12px;color:#5FA071;">✅ 问题来了:AI 会不会提到你?</div></div>
+  </div>
+  <span slot="caption">用户从"自己翻结果"变成"问 AI 要答案"</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+让 AI 在回答里主动提到、推荐你，这件事叫 <Term id="geo">「AI 可见性」</Term>(行话叫 GEO)。<span class="hl-g">它正在变成新的"被搜到"。</span><span style="color:#9A876F;font-size:13.5px;">（点高亮词看看）</span>
+
+<Callout type="tip">
+**两组真实趋势**:<br/>
+· **AI 搜索**:AI 回答引用的来源里，来自传统搜索前 10 名的比例，一年内从约 **76% 降到约 38%**——也就是说，现在约 6 成引用都不在前 10。<br/>
+· **用户习惯**:近 **6 成**美国人已用 AI 购物，**1/4** 觉得 ChatGPT 的产品推荐比 Google 还好。<br/>
+<span style="font-size:12px;color:#9A876F;">来源:Ahrefs 对 Google AI 概览的研究、公开消费调研。</span>
+</Callout>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`有没有适合【你的目标用户，比如奶茶店老板】的【你这类产品 / 服务，比如自动记账工具】?
+请推荐几个，并说说各自为什么值得推荐。`}>
+  <span slot="intro">想知道 AI 眼里有没有你?假装你是潜在客户，问它这一句，看它提不提你:</span>
+</TryThis>

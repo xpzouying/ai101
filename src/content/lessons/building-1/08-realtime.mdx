@@ -1,0 +1,47 @@
+---
+title: 让它查实时的事
+building: 1
+chapter: 1
+order: 8
+kind: atom
+hookMood: think
+hook: 问 AI"今天的新闻""现在的汇率"，它要么说不知道，<span class="hl-o">要么一本正经编一个?</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+import Callout from '../../../components/Callout.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="没开联网" afterLabel="开了联网">
+  <div slot="before">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><div style="background:#E4DDD0;color:#6A5E4C;padding:9px 13px;border-radius:15px;border-top-right-radius:4px;font-size:14px;max-width:80%;">这周有什么大新闻?</div></div>
+    <div style="display:flex;gap:8px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#D8CFBE;"></div><div style="background:#fff;color:#8A7C66;padding:10px 13px;border-radius:15px;border-top-left-radius:4px;font-size:13.5px;line-height:1.65;max-width:84%;">我的信息更新到某个时间点，无法获知最近发生的事……<div style="margin-top:8px;font-size:12px;color:#B07B4E;">😶 它有"知识截止"，最近的事真不知道</div></div></div>
+  </div>
+  <div slot="after">
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;margin-bottom:10px;">
+      <div style="background:#FCEBCF;color:#9A6A2E;padding:7px 11px;border-radius:12px;font-size:12.5px;max-width:90%;">🌐 先打开"联网搜索"</div>
+      <div style="background:#F5A04C;color:#fff;padding:9px 13px;border-radius:15px;border-top-right-radius:4px;font-size:14px;max-width:80%;">这周有什么大新闻?</div>
+    </div>
+    <div style="display:flex;gap:8px;"><div style="width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:#7FB98E;"></div><div style="background:#fff;color:#4A3A2C;padding:10px 13px;border-radius:15px;border-top-left-radius:4px;font-size:13.5px;line-height:1.65;max-width:84%;box-shadow:0 3px 10px rgba(120,90,50,0.08);">这周……(现场查到的几条)，每条后面都附了来源链接 🔗，你能点进去核对。<div style="margin-top:8px;font-size:12px;color:#5FA071;">✅ 现查现答，还给出处</div></div></div>
+  </div>
+  <span slot="caption">要问最近的事，先把"联网搜索"打开</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+让 AI 当场上网查，叫 <Term id="realtime">「联网搜索」</Term>;它默认只知道训练时的旧信息，那个时间点叫 <Term id="cutoff">「知识截止」</Term>。<span class="hl-g">问最近的事、要准数据，一定先开联网。</span><span style="color:#9A876F;font-size:13.5px;">（点高亮词看看）</span>
+
+<Callout type="same">
+怎么开联网各家略不同:<strong>DeepSeek</strong> 要手动点"联网搜索"开关（开了就不能同时传文件）；<strong>ChatGPT / Claude</strong> 会按需自动联网（或在设置里打开）；<strong>Kimi / 豆包</strong> 自带联网能力。
+</Callout>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`请联网帮我查：【最近 / 今天的某件事，比如某城市天气、某产品现价、本周新闻】。
+要求：附上来源链接，方便我核对；查不到就说查不到，别编。`}>
+  <span slot="intro">打开联网搜索，把【】换成你想知道的最近的事，发给它:</span>
+</TryThis>

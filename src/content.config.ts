@@ -6,8 +6,8 @@ const lessons = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/lessons' }),
   schema: z.object({
     title: z.string(),
-    // 哪栋楼:1 = 聊天 AI(全民);2 = Agent CLI 实操(进阶)
-    building: z.union([z.literal(1), z.literal(2)]),
+    // 哪栋楼:1 = 聊天 AI(全民);2 = Agent CLI 实操(进阶);3 = 让 AI 看见你(AI 可见性)
+    building: z.union([z.literal(1), z.literal(2), z.literal(3)]),
     // 第几章 / 关内排序
     chapter: z.number(),
     order: z.number(),
