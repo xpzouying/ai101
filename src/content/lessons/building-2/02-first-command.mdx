@@ -1,0 +1,35 @@
+---
+title: 敲你的第一条命令
+building: 2
+chapter: 1
+order: 2
+kind: atom
+hookMood: hi
+hook: 这一关要在电脑上敲几个字，但别怕——<span class="hl-g">跟我一步一步来，敲错了删掉重来就行</span>，什么都不会弄坏。
+---
+
+import Terminal from '../../../components/Terminal.astro';
+import Callout from '../../../components/Callout.astro';
+
+<div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+  <div style="display:flex;gap:13px;align-items:flex-start;"><div style="width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:#7FB98E;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-hand);font-size:16px;">1</div><div style="flex:1;padding-top:4px;font-size:15px;line-height:1.7;">打开“终端”——就是那个黑黑的小窗口。<span style="color:#8A7860;font-size:13.5px;">（Mac 搜“终端”，Windows 搜“PowerShell”）</span></div></div>
+  <div style="display:flex;gap:13px;align-items:flex-start;"><div style="width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:#7FB98E;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-hand);font-size:16px;">2</div><div style="flex:1;padding-top:4px;font-size:15px;line-height:1.7;">把下面这一行原样敲进去（或点复制）。</div></div>
+  <div style="display:flex;gap:13px;align-items:flex-start;"><div style="width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:#7FB98E;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-hand);font-size:16px;">3</div><div style="flex:1;padding-top:4px;font-size:15px;line-height:1.7;">按回车，等它跑——它会自己跟你打招呼。</div></div>
+</div>
+
+<Terminal
+  command="claude"
+  lines={[
+    { text: '✓ 已连接。你好呀～我是你的命令行助手 👋', color: '#8FC79E' },
+    { text: '今天想让我帮你做点什么？', color: '#EDE3D0' },
+    { text: '（直接用中文跟我说就行，不用懂代码）', color: '#A89B84' },
+  ]}
+/>
+
+<Callout type="same">
+  你用 <strong>Kimi Code CLI</strong> 也一样，只是把 <code>claude</code> 换成 <code>kimi</code> 。
+</Callout>
+
+<Callout type="danger" title="⚠️ 别喂这些给它">
+  公司机密 · 客户隐私 · 未公开数据
+</Callout>

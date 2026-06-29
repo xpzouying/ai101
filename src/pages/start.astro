@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Mascot from '../components/Mascot.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import Term from '../components/Term.astro';
+import TryThis from '../components/TryThis.astro';
+import TermModal from '../components/TermModal.astro';
+
+const fourPart = [
+  { n: '①', t: '你现在的烦恼', s: '泡芙先说出一个你也遇过的糟心事', c: 'orange' },
+  { n: '②', t: '看个对比', s: '同一件事,做之前 vs 做之后,一眼看出差别', c: 'orange' },
+  { n: '③', t: '它叫什么', s: '这时才告诉你这招的名字,点一下能看解释', c: 'green' },
+  { n: '④', t: '你去试一下', s: '给你一段现成的话,一键复制,马上去试', c: 'green' },
+];
+---
+<BaseLayout title="怎么玩 · 泡芙小姐的 AI 101">
+  <main>
+    <div class="top">
+      <a class="brand" href="/">
+        <span class="logo">AI</span>
+        <span class="brand-name">泡芙小姐的 AI 101</span>
+      </a>
+      <span class="badge-pub">公益 · 免登录</span>
+    </div>
+
+    <!-- 欢迎 -->
+    <section class="hero">
+      <div class="hero-mascot"><Mascot mood="hi" size={104} /></div>
+      <div class="hero-text">
+        <h1>先花 30 秒,<br />看懂怎么玩 🎮</h1>
+        <p>这里没有考试、没有术语轰炸。<span class="hl-o">一关一关来,每关 2~3 分钟</span>,泡芙全程陪你。</p>
+      </div>
+    </section>
+
+    <!-- 每一关都长这样 -->
+    <h2 class="sec-title">每一关,都长这样</h2>
+    <div class="four">
+      {fourPart.map((p) => (
+        <div class="four-card">
+          <span class={`four-n four-${p.c}`}>{p.n}</span>
+          <div class="four-t">{p.t}</div>
+          <div class="four-s">{p.s}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- 三个小互动,先玩一下 -->
+    <h2 class="sec-title">三个小互动,先在这儿玩一下</h2>
+
+    <div class="demo">
+      <div class="demo-k">🖐 一、拖一下中间的线,看 before / after</div>
+      <BeforeAfter beforeLabel="拖到这边看左边" afterLabel="拖到那边看右边" height={150}>
+        <div slot="before"><div style="font-size:14px;color:#8A7C66;">这是"没这么做"的样子——<br/>泡芙会把糟糕的结果放这边 🙈</div></div>
+        <div slot="after"><div style="font-size:14px;color:#4A3A2C;">这是"做了之后"的样子——<br/>明显更好,对吧?✨</div></div>
+        <span slot="caption">每一关都有这么一块,拖着玩就懂了</span>
+      </BeforeAfter>
+    </div>
+
+    <div class="demo">
+      <div class="demo-k">👆 二、点一下荧光笔划的词,看解释</div>
+      <p class="demo-body">遇到不懂的词,别慌。比如这个 <Term id="prompt" tone="orange">「提示词」</Term> ——点一下,泡芙就弹出一张小卡片告诉你它是什么、它怎么改变 AI。<span style="color:#9A876F;font-size:13.5px;">(现在就点点看 👆)</span></p>
+    </div>
+
+    <div class="demo">
+      <div class="demo-k">📋 三、一键复制,拿去就能用</div>
+      <TryThis prompt={`你好呀,我刚开始学用你。请用一句话,夸夸正在学习的我 😄`}>
+        <span slot="intro">每关结尾都有这么一段现成的话,点下面的按钮复制,粘到 AI 里试试:</span>
+      </TryThis>
+    </div>
+
+    <!-- 几个安心的小约定 -->
+    <h2 class="sec-title">几个让你安心的小约定</h2>
+    <div class="vows">
+      <div class="vow"><span>🔓</span> 不用登录、不用付费,随时来随时走</div>
+      <div class="vow"><span>⏱️</span> 一关 2~3 分钟,通勤路上就能学一关</div>
+      <div class="vow"><span>🐤</span> 怕就对了——泡芙带你,一步一步,不会弄坏任何东西</div>
+    </div>
+
+    <!-- CTA -->
+    <a class="cta" href="/lessons/building-1/01-clear/">
+      好啦,开始第 1 关 · 把话说清楚 →
+    </a>
+    <p class="foot">泡芙陪你,一关一关来 · AI 101</p>
+
+    <TermModal />
+  </main>
+</BaseLayout>
+
+<style>
+  main { max-width: 720px; margin: 0 auto; padding: 22px 20px 48px; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-hand); font-size: 18px; color: #fff; background: var(--c-orange); width: 42px; height: 42px; border-radius: 13px; box-shadow: 0 4px 10px rgba(245,160,76,0.4); transform: rotate(-6deg); }
+  .brand-name { font-family: var(--font-hand); font-size: 20px; }
+  .badge-pub { font-size: 13px; color: var(--c-ink-mute); background: var(--c-card); border: 1.5px dashed var(--c-border-dash); padding: 5px 12px; border-radius: var(--radius-pill); }
+
+  .hero { display: flex; align-items: center; gap: 16px; background: var(--c-card); border: 1.5px solid var(--c-border); border-radius: 26px; padding: 20px 22px; box-shadow: var(--shadow-card); margin-bottom: 28px; }
+  .hero-mascot { width: 104px; flex: 0 0 auto; }
+  .hero-text h1 { font-size: 26px; margin: 0 0 8px; }
+  .hero-text p { font-size: 15px; line-height: 1.7; margin: 0; color: var(--c-ink-soft); }
+
+  .sec-title { font-family: var(--font-hand); font-size: 21px; margin: 0 0 14px; }
+
+  .four { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
+  .four-card { background: var(--c-card); border: 1.5px solid var(--c-border); border-radius: 18px; padding: 14px 16px; box-shadow: var(--shadow-soft); }
+  .four-n { display: inline-block; font-size: 13px; color: #fff; padding: 2px 9px; border-radius: var(--radius-pill); margin-bottom: 7px; }
+  .four-orange { background: var(--c-orange); }
+  .four-green { background: var(--c-green); }
+  .four-t { font-size: 15px; font-weight: 600; color: var(--c-ink-strong); }
+  .four-s { font-size: 13px; color: var(--c-ink-mute); margin-top: 3px; line-height: 1.6; }
+
+  .demo { margin-bottom: 24px; }
+  .demo-k { font-size: 15px; font-weight: 600; color: var(--c-ink-strong); margin-bottom: 10px; }
+  .demo-body { font-size: 15.5px; line-height: 1.9; margin: 0; }
+
+  .vows { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+  .vow { display: flex; align-items: center; gap: 10px; background: var(--c-card); border: 1.5px solid var(--c-border); border-radius: 16px; padding: 12px 15px; font-size: 14.5px; box-shadow: var(--shadow-soft); }
+  .vow span { font-size: 19px; }
+
+  .cta { display: block; text-align: center; text-decoration: none; font-family: var(--font-hand); font-size: 19px; color: #fff; background: var(--c-orange); padding: 16px; border-radius: 18px; box-shadow: 0 8px 18px rgba(245,160,76,0.35); }
+  .foot { text-align: center; padding: 26px 0 0; font-size: 13px; color: var(--c-ink-mute2); }
+
+  @media (max-width: 480px) { .four { grid-template-columns: 1fr; } }
+</style>

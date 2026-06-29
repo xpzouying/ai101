@@ -1,0 +1,34 @@
+---
+// 标注框。两种:
+//  type="same"   📌 「你用 Kimi Code CLI 也一样…」(工具一致性铁律)
+//  type="danger" ⚠️ 便利贴「别喂这些:公司机密…」(安全红线)
+interface Props { type?: 'same' | 'danger' | 'tip'; title?: string; }
+const { type = 'same', title } = Astro.props;
+---
+{type === 'danger' ? (
+  <div class="sticky">
+    <div class="sticky-tape"></div>
+    {title && <div class="sticky-title">{title}</div>}
+    <div class="sticky-body"><slot /></div>
+  </div>
+) : (
+  <aside class={`pin pin-${type}`}>
+    <span class="pin-icon" aria-hidden="true">{type === 'same' ? '📌' : '💡'}</span>
+    <div class="pin-body"><slot /></div>
+  </aside>
+)}
+
+<style>
+  /* 📌 钉住的提示框 */
+  .pin { position: relative; background: var(--c-after-1); border: 1.5px solid #F6D9A8; border-radius: 16px; padding: 15px 16px 15px 18px; margin: 20px 0; box-shadow: var(--shadow-soft); }
+  .pin-icon { position: absolute; top: -12px; left: 18px; font-size: 22px; transform: rotate(-12deg); }
+  .pin-body { font-size: 14.5px; line-height: 1.7; color: #7A5A2A; }
+  .pin-body :global(code) { background: #F4E2BE; padding: 1px 7px; border-radius: 6px; color: var(--c-orange-deep); }
+  .pin-body :global(strong) { color: var(--c-orange-deep); }
+
+  /* ⚠️ 便利贴(安全红线) */
+  .sticky { position: relative; background: #FDF0B8; border-radius: 6px; padding: 16px 20px; max-width: 360px; margin: 24px auto; box-shadow: 0 10px 22px rgba(120,90,50,0.15); transform: rotate(-2.5deg); }
+  .sticky-tape { position: absolute; top: -9px; left: 50%; width: 80px; height: 20px; background: var(--c-tape); transform: translateX(-50%) rotate(2deg); }
+  .sticky-title { font-family: var(--font-hand); font-size: 16px; color: #8A6A1E; margin-bottom: 6px; }
+  .sticky-body { font-size: 14px; line-height: 1.8; color: #7A6526; }
+</style>

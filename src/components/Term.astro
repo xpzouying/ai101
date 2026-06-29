@@ -1,0 +1,16 @@
+---
+// ③ 它叫什么 —— 正文里的高亮术语词。点一下弹出术语卡(由 TermModal 统一处理)。
+// 用法:<Term id="context">上下文</Term>
+interface Props { id: string; tone?: 'orange' | 'green'; }
+const { id, tone = 'green' } = Astro.props;
+---
+<button type="button" class={`term term-${tone}`} data-term-id={id}><slot /></button>
+
+<style>
+  .term {
+    font: inherit; border: none; background: transparent; cursor: pointer; padding: 0 2px;
+    font-weight: 600;
+  }
+  .term-green { background: linear-gradient(transparent 56%, var(--hl-green) 56%); border-bottom: 1.5px dotted var(--c-green-deep); }
+  .term-orange { background: linear-gradient(transparent 56%, var(--hl-orange) 56%); border-bottom: 1.5px dotted var(--c-orange-deep); }
+</style>

@@ -1,0 +1,30 @@
+---
+// 合练关:把学过的招式串起来,一步一行(带虚线连接)。
+interface Props { n: string; title: string; from: string; last?: boolean; }
+const { n, title, from, last = false } = Astro.props;
+---
+<div class="cs">
+  <div class="cs-rail">
+    <div class="cs-num">{n}</div>
+    {!last && <div class="cs-line"></div>}
+  </div>
+  <div class="cs-card">
+    <div class="cs-head">
+      <span class="cs-title">{title}</span>
+      <span class="cs-from">{from}</span>
+    </div>
+    <div class="cs-prompt"><slot /></div>
+  </div>
+</div>
+
+<style>
+  .cs { display: flex; gap: 13px; }
+  .cs-rail { display: flex; flex-direction: column; align-items: center; flex: 0 0 auto; }
+  .cs-num { width: 34px; height: 34px; border-radius: 50%; background: var(--c-orange); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-hand); font-size: 17px; }
+  .cs-line { flex: 1; width: 2px; background: repeating-linear-gradient(var(--c-border-dash), var(--c-border-dash) 4px, transparent 4px, transparent 8px); margin-top: 4px; }
+  .cs-card { flex: 1; min-width: 0; background: var(--c-card); border: 1.5px solid var(--c-border); border-radius: 18px; padding: 13px 15px; box-shadow: var(--shadow-soft); margin-bottom: 14px; }
+  .cs-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 7px; }
+  .cs-title { font-size: 15px; font-weight: 600; color: var(--c-ink-strong); }
+  .cs-from { font-size: 11px; color: var(--c-green-deep); background: #EAF6EE; padding: 3px 9px; border-radius: var(--radius-pill); }
+  .cs-prompt { font-size: 13.5px; line-height: 1.7; color: var(--c-ink-soft); background: #FAF3E5; border-radius: 11px; padding: 9px 12px; }
+</style>

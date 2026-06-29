@@ -1,0 +1,62 @@
+/*
+ * 设计令牌(Design Tokens)—— 来自 Claude Design「泡芙小姐的 AI 101」设计稿。
+ * 换肤只改这一个文件;所有组件都引用这里的变量。
+ */
+:root {
+  /* —— 暖色纸感 —— */
+  --c-paper: #FBF3E4;        /* 主纸底 */
+  --c-paper-2: #F4EAD6;      /* 封面/次级纸底 */
+  --c-card: #FFFBF3;         /* 卡片底 */
+  --c-term-card: #FFFBEF;    /* 术语卡底 */
+
+  /* —— 墨色 / 文字 —— */
+  --c-ink: #4A3A2C;          /* 正文 */
+  --c-ink-strong: #3A2C1E;   /* 标题 */
+  --c-ink-soft: #6F5E48;     /* 次要正文 */
+  --c-ink-mute: #9A876F;     /* 弱化说明 */
+  --c-ink-mute2: #A8957A;    /* 更弱 */
+
+  /* —— 荧光橘黄(主强调) —— */
+  --c-orange: #F5A04C;
+  --c-orange-light: #F8B05B;
+  --c-orange-deep: #C08A3C;
+
+  /* —— 薄荷绿(次强调 / 进阶层) —— */
+  --c-green: #7FB98E;
+  --c-green-deep: #5FA071;
+  --c-green-light: #8FC79E;
+
+  /* —— 描边 —— */
+  --c-border: #EFE0C6;
+  --c-border-dash: #E6D6BC;
+
+  /* —— before / after —— */
+  --c-before: #F2EEE6;
+  --c-after-1: #FFF6E6;
+  --c-after-2: #FFFBF3;
+
+  /* —— 荧光笔高亮(正文划重点) —— */
+  --hl-orange: rgba(245, 160, 76, 0.5);
+  --hl-green: rgba(127, 185, 142, 0.55);
+
+  /* —— 胶带 —— */
+  --c-tape: rgba(245, 160, 76, 0.4);
+
+  /* —— 圆角(大而软) —— */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* —— 柔和暖色投影 —— */
+  --shadow-soft: 0 6px 16px rgba(120, 90, 50, 0.07);
+  --shadow-card: 0 10px 28px rgba(120, 90, 50, 0.08);
+  --shadow-pop: 0 18px 44px rgba(58, 44, 30, 0.28);
+
+  /* —— 字体 —— */
+  --font-hand: 'ZCOOL KuaiLe', cursive;                          /* 手写感标题 */
+  --font-body: 'LXGW WenKai', 'Noto Sans SC', sans-serif;        /* 圆润亲和正文(霞鹜文楷) */
+
+  /* —— 排版 —— */
+  --measure: 720px;
+}

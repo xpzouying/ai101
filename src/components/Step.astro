@@ -1,0 +1,18 @@
+---
+// 四段式的小药丸徽标:① 你现在的烦恼 / ② 看个对比 / ③ 它叫什么 / ④ 你去试一下
+// tone: orange(①②) / green(③④)
+interface Props { n: string; label: string; tip?: string; tone?: 'orange' | 'green'; }
+const { n, label, tip, tone = 'orange' } = Astro.props;
+---
+<div class="step-badge">
+  <span class={`pill pill-${tone}`}>{n} {label}</span>
+  {tip && <span class="tip">{tip}</span>}
+</div>
+
+<style>
+  .step-badge { display: flex; align-items: center; gap: 8px; margin: 26px 0 12px; flex-wrap: wrap; }
+  .pill { font-size: 12px; color: #fff; padding: 3px 9px; border-radius: var(--radius-pill); }
+  .pill-orange { background: var(--c-orange); }
+  .pill-green { background: var(--c-green); }
+  .tip { font-size: 13px; color: var(--c-ink-mute); }
+</style>
