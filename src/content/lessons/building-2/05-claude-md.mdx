@@ -1,0 +1,44 @@
+---
+title: 让它记住你的活儿
+building: 2
+chapter: 1
+order: 5
+kind: atom
+hookMood: think
+hook: 每次都要跟它重复"用中文、先说方案再动手、别删文件"?<span class="hl-g">让它记住一次就够了。</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+import Callout from '../../../components/Callout.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="每次重新交代" afterLabel="写一次就记住">
+  <div slot="before">
+    <div style="font-size:14px;color:#8A7C66;line-height:1.9;">每开一个新对话，你都要重新说一遍:<br/>"回复用中文……改之前先说方案……别动我那个文件……"<div style="margin-top:10px;font-size:12px;color:#B07B4E;">😮‍💨 像每天给新员工重讲一遍规矩</div></div>
+  </div>
+  <div slot="after">
+    <div style="font-size:14px;color:#4A3A2C;line-height:1.9;">在项目文件夹里放一份 <strong>CLAUDE.md</strong>，把规矩写进去。<br/>它每次启动<strong>自动先读这份文件</strong>，自动照着做。<div style="margin-top:10px;font-size:12px;color:#5FA071;">✅ 写一次，之后每次它都记得</div></div>
+  </div>
+  <span slot="caption">把你的规矩写一次，它每次都记得</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+这份"规矩说明书"叫 <Term id="claudemd">CLAUDE.md</Term>，放在你的项目文件夹里。Claude Code 每次启动都先读它，<span class="hl-g">把你的偏好当成默认规矩。</span><span style="color:#9A876F;font-size:13.5px;">（点高亮词看看）</span>
+
+<Callout type="same">
+用 <strong>Kimi Code</strong> 的话，这份文件叫 <code>AGENTS.md</code>，作用一模一样。
+</Callout>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`帮我在当前项目里创建一份 CLAUDE.md，写上我的偏好：
+1. 所有回复用中文；
+2. 改文件之前，先简单说一下你打算怎么改；
+3. 不要删除我的文件。`}>
+  <span slot="intro">让 Claude 自己帮你建这份文件——直接发这段:</span>
+</TryThis>

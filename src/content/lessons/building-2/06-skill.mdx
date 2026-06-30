@@ -1,0 +1,47 @@
+---
+title: 给它装个专长
+building: 2
+chapter: 1
+order: 6
+kind: atom
+hookMood: aha
+hook: CLAUDE.md 让它记住你的规矩;那能不能让它<span class="hl-g">直接学会"做某一类活"的整套本事?</span>能,装个"专长包"就行。
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+import Callout from '../../../components/Callout.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="没装专长" afterLabel="装了「写周报」专长" height={270}>
+  <div slot="before">
+    <div style="font-size:14px;color:#8A7C66;line-height:1.9;">每次写周报，你都要重新交代:"按 上周成果 / 本周计划 / 风险 三段，每段不超过 3 条，语气克制，附上这个格式范例……"<div style="margin-top:10px;font-size:12px;color:#B07B4E;">😮‍💨 换台电脑、隔几天，又得贴一遍</div></div>
+  </div>
+  <div slot="after">
+    <div style="font-size:14px;color:#4A3A2C;line-height:1.9;">你只说一句"<strong>帮我写本周周报</strong>"。<br/>它自动认出这是写周报的活，<strong>按你预设好的结构、条数、语气</strong>直接产出。<div style="margin-top:10px;font-size:12px;color:#5FA071;">✅ 做法存一次，以后自动复用</div></div>
+  </div>
+  <span slot="caption">把"某类活的做法"打包一次，它以后自动照做</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+这种"某类活的整套做法包"，叫 <Term id="skill">「SKILL」(专长包)</Term>——其实就是一个文件夹,里面写好"这类活该怎么做"。<span class="hl-g">它靠你写的一句"描述"来自动触发</span>:你一提到"写周报",它就认出该用这个专长。<span style="color:#9A876F;font-size:13.5px;">（点高亮词看看）</span>
+
+<Callout type="tip">
+其实你可能早就在用它了:claude.ai 网页版能直接帮你生成、处理 Word / Excel / PDF，背后就是几个<strong>预置专长包</strong>在默默工作。
+</Callout>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`帮我创建一个"写周报"的 skill，放到 ~/.claude/skills/weekly-report/ 里：
+- 描述写"当我要写周报或工作汇报时使用"；
+- 内容:按 上周成果 / 本周计划 / 风险 三段写，每段不超过 3 条，语气克制、别写废话。`}>
+  <span slot="intro">让 Claude 自己帮你做一个专长包——发这段;之后你只说"帮我写周报"它就会用上:</span>
+</TryThis>
+
+<Callout type="same">
+<strong>Kimi Code</strong> 用的是同一套开放标准(agentskills.io)，甚至能直接读 <code>~/.claude/skills/</code> 里的专长包——做一次，两边通用。
+</Callout>

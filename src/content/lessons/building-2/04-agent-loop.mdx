@@ -1,0 +1,39 @@
+---
+title: 它到底怎么自己干活
+building: 2
+chapter: 1
+order: 4
+kind: atom
+hookMood: aha
+hook: 前面它帮你改了文件——你有没有好奇,<span class="hl-g">它到底是怎么"自己"一步步把活干完的?</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="聊天 AI" afterLabel="Agent" height={270}>
+  <div slot="before">
+    <div style="font-size:14px;color:#8A7C66;line-height:1.9;">你问一句 → 它<strong>答你一段文字</strong> → 然后呢?<br/><br/>剩下的复制、操作、跑一遍、出错再回来问……<strong>全得你自己来。</strong><div style="margin-top:10px;font-size:12px;color:#B07B4E;">📋 它只给"说明书"</div></div>
+  </div>
+  <div slot="after">
+    <div style="font-size:14px;color:#4A3A2C;line-height:1.9;">你说一句 → 它自己转起一个圈:<br/><strong>看</strong>(读文件/现状)→ <strong>想</strong>(该怎么做)→ <strong>动手</strong>(真去改)→ <strong>看结果</strong> → 不对就再来一圈 → 直到搞定。<div style="margin-top:10px;font-size:12px;color:#5FA071;">🛠 它直接"把事做了",还自己纠错</div></div>
+  </div>
+  <span slot="caption">聊天 AI 给你"说明书";Agent 直接帮你"把事做了"</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+这种"看 → 想 → 做 → 再看"不停转圈的过程，叫 <Term id="agentloop">「Agent 循环」</Term>。<span class="hl-g">这就是 Agent 和聊天 AI 最大的不同:聊天 AI 只会"说",Agent 会"做"、还会自己纠错。</span><span style="color:#9A876F;font-size:13.5px;">（点高亮词看看）</span>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`帮我在当前文件夹里:
+1. 列出所有 .txt 文件；
+2. 找出文件名里带"草稿"两个字的；
+3. 告诉我一共有几个、都叫什么。`}>
+  <span slot="intro">给它一件"要好几步才能完成"的活，盯着它怎么一步步转这个圈:</span>
+</TryThis>
