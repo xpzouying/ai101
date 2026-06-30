@@ -1,0 +1,47 @@
+---
+title: 让它帮你画图
+building: 1
+chapter: 1
+order: 9
+kind: atom
+hookMood: aha
+hook: 想给文章配张图、又找不到合适的?其实你可以<span class="hl-o">用一句话让 AI 直接画出来。</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+import Callout from '../../../components/Callout.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="到处找图" afterLabel="一句话出图">
+  <div slot="before">
+    <div style="font-size:14px;color:#8A7C66;line-height:1.9;">公众号要配张图，你在图库里翻了半天，<br/>要么找不到合适的，要么得花钱买版权图。<div style="margin-top:10px;font-size:12px;color:#B07B4E;">😮‍💨 又费时又费钱</div></div>
+  </div>
+  <div slot="after">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><div style="background:#F5A04C;color:#fff;padding:9px 13px;border-radius:15px;border-top-right-radius:4px;font-size:13px;max-width:92%;line-height:1.5;">画一只戴眼镜的橘猫坐书桌前看书，扁平插画风、暖色调</div></div>
+    <div style="display:flex;gap:6px;"><div style="flex:1;height:54px;background:#FCEBCF;border-radius:8px;"></div><div style="flex:1;height:54px;background:#EAF6EE;border-radius:8px;"></div><div style="flex:1;height:54px;background:#FAE4E1;border-radius:8px;"></div></div>
+    <div style="margin-top:8px;font-size:12px;color:#5FA071;">✅ 几秒出好几张，挑一张就能用</div>
+  </div>
+  <span slot="caption">不用翻图库了，描述给它，它画给你</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+这种"用文字描述生成图片"的本事，叫 <Term id="text2image">「文生图」</Term>。<span class="hl-g">想到啥画面，就描述给它。</span><span style="color:#9A876F;font-size:13.5px;">（点高亮词看看）</span>
+
+<Callout type="tip">
+**这一关有点不一样**:我们平时主示范的 **Kimi 暂时不能生图**(它能看图、但不画图)。能直接画图的是 **豆包、即梦、ChatGPT**，还有专门的 **文心一格、通义万相**。操作都差不多:找到"图像生成 / 文生图"入口，或直接说"帮我画一张……"。
+</Callout>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`帮我画一张:【描述你要的画面，比如:一杯冒着热气的咖啡放在木桌上，旁边一本翻开的书，清晨阳光，温暖治愈的插画风】`}>
+  <span slot="intro">打开豆包 / 即梦 / 文心一格，找到"图像生成"，把这句改成你要的画面:</span>
+</TryThis>
+
+<Callout type="danger" title="⚠️ 用图前先想一下">
+AI 生成的图，按国内规定通常会自带"AI 生成"标识；要拿去商用，先看一眼该平台的协议，别去仿冒别人的 IP、商标或名人形象。
+</Callout>

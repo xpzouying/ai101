@@ -1,0 +1,45 @@
+---
+title: 让聊天 AI 记住你
+building: 1
+chapter: 1
+order: 10
+kind: atom
+hookMood: think
+hook: 每次让 AI 帮你干活，都要先打一长串"我是做什么的、要什么口吻"?<span class="hl-o">填一次，以后它就记得。</span>
+---
+
+import Step from '../../../components/Step.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Term from '../../../components/Term.astro';
+import TryThis from '../../../components/TryThis.astro';
+import Callout from '../../../components/Callout.astro';
+
+<Step n="②" label="看个对比" tip="拖中间这条线 →" />
+
+<BeforeAfter beforeLabel="每次重新交代" afterLabel="填一次资料卡">
+  <div slot="before">
+    <div style="font-size:14px;color:#8A7C66;line-height:1.9;">每次让它改文案，你都先打一遍:"我做母婴电商，语气要亲切口语、别太正式、结尾带行动号召……"<div style="margin-top:10px;font-size:12px;color:#B07B4E;">😮‍💨 同样的开场白，天天重打</div></div>
+  </div>
+  <div slot="after">
+    <div style="font-size:14px;color:#4A3A2C;line-height:1.9;">在设置里把这段背景<strong>填一次</strong>。<br/>以后直接发"帮我改这段文案"，它就默认<strong>按你的行业和口吻</strong>来。<div style="margin-top:10px;font-size:12px;color:#5FA071;">✅ 一次设置，长期生效</div></div>
+  </div>
+  <span slot="caption">给它填张"个人资料卡"，不用每次重新交代</span>
+</BeforeAfter>
+
+<Step n="③" label="它叫什么" tone="green" />
+
+这张"长期生效的资料卡"，在 ChatGPT 里叫 <Term id="custom-instructions">「自定义指令」</Term>，各家叫法不同、意思一样:<span class="hl-g">填一次，它就记住你是谁、爱什么口味。</span><span style="color:#9A876F;font-size:13.5px;">（点高亮词看看）</span>
+
+<Callout type="same">
+**各家在哪设**:<strong>Kimi</strong>「设置 › 个性化 › 记忆空间」(也可以直接在对话里说"记住:我是…");<strong>ChatGPT</strong>「设置 › 个性化」;<strong>Claude</strong>「设置 › 个人偏好(Profile)」手填(它还有个会自动记你习惯的 Memory);<strong>豆包</strong>「设置 › 记忆」。(DeepSeek 暂时没有跨对话的记忆。)
+</Callout>
+
+<Step n="④" label="你去试一下" tone="green" />
+
+<TryThis prompt={`我是【你的身份 / 行业，比如:做母婴电商的运营】。
+以后回复请：
+· 语气【亲切口语 / 简洁专业…】；
+· 长度【简短为主 / 尽量详细】；
+· 【其它习惯，比如:结尾给我一条行动建议】。`}>
+  <span slot="intro">把这段填到你常用 AI 的"自定义指令 / 个性化"设置里(不是发在对话框):</span>
+</TryThis>
